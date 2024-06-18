@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, Image } from 'react-native';
-import axios from 'axios';
-import api from './api/api';
+import apiMangas from './api/apiMangas';
 
 const App = () => {
   const [ mangas, setMangas ] = useState([]);
@@ -12,7 +11,7 @@ const App = () => {
 
   const fetchMangaList = async () => {
     try {
-      const response = await api.get('/api/mangaList');
+      const response = await apiMangas.get('/api/mangaList');
       setMangas(response.data.mangaList)
     } catch (error) {
       console.error('There was an error fetching the manga list!', error);
