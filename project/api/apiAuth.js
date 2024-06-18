@@ -1,10 +1,9 @@
 import axios from "axios";
 
 //usando o serveo.net
-const url = "***";
 
 const apiAuth = axios.create({
-    baseURL: url
+    baseURL: "***"
 })
 
 export default apiAuth;
