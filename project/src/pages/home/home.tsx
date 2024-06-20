@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, Button, ActivityIndicator } from 'react-native';
+import { View, Text, FlatList, Button, ActivityIndicator, ScrollView } from 'react-native';
 import { api } from '../../services/mangahook-api/api';
+import { MangaCard } from '../../components/MangaCard/MangaCard';
+import { HomeHeader } from '../../components/HomeHeader/HomeHeader';
+
+export interface MangaItem {
+  id: string,
+  image: string,
+  title: string,
+  chapter: string,
+  description: string,
+  view: string
+}
 
 export const Home = ({ navigation }) => {
-  const [mangas, setMangas] = useState([]);
+  const [mangas, setMangas] = useState<MangaItem[]>([]);
   const [metaData, setMetaData] = useState()
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -52,21 +63,25 @@ export const Home = ({ navigation }) => {
   );
 
   return (
-    <View style={{ flex: 1 }}>
+    <ScrollView style={{ flex: 1, backgroundColor: '#222' }}>
+      <HomeHeader/>
+      {loading ? <ActivityIndicator size="large" /> 
+      :
+      <FlatList
+        data={mangas}
+        renderItem={({ item }) => 
+          <MangaCard item={item} onPress={() => navigation.navigate('Detalhes da obra', { mangaId: item.id })}/>
+        }
+        keyExtractor={(item) => item.id.toString()}
+        scrollEnabled={false}
+        style={{padding: 10}}
+      />}
       <View>
         <Text>Pagina: {page}</Text>
         {page != 1 && <Text onPress={handlePressPagePrev}>Prev</Text>}
         {page != metaData && <Text onPress={handlePressPageProx}>Prox</Text>}
         <Text onPress={handlePressPageDefault}>Voltar ao inicio</Text>
       </View>
-      
-      {loading ? <ActivityIndicator size="large" /> : null}
-      <FlatList
-        data={mangas}
-        renderItem={renderMangaItem}
-        keyExtractor={(item) => item.id.toString()}
-        onEndReachedThreshold={0.5}
-      />
-    </View>
+    </ScrollView>
   );
 };

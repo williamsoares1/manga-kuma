@@ -7,8 +7,6 @@ export const MangaEsp = ({ route }) => {
   const [manga, setManga] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  console.log(mangaId)
-
   const fetchMangaDetails = async () => {
     try {
       const response = await api.get(`/api/manga/${mangaId}`)
