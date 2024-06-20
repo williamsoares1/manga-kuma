@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
         marginVertical: 8,
         borderColor: '#fff',
         borderWidth: 1,
-        borderRadius: 8
+        borderRadius: 8,
     },
     image: {
         width: 150,
@@ -24,9 +24,9 @@ export const styles = StyleSheet.create({
     detailContainer: {
         flex: 1,
         padding: 5,
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
     },
-    chapterButton: {
+    button: {
         backgroundColor: '#222',
         width: 180,
         height: 40,
@@ -37,5 +37,19 @@ export const styles = StyleSheet.create({
         borderColor: '#fff',
         borderWidth: 2,
         color: '#fff',
+    },
+    filterEstructure: {
+        backgroundColor: '#222',
+        padding: 10,
+        flex: 1,
+        flexDirection: "column",
+        alignItems: 'center',
+        gap: 15,
+        marginVertical: 15,
+        borderColor: '#fff',
+        borderWidth: 1,
+        borderRadius: 8,
+        width: 250,
+        alignSelf: 'center',
     }
 }); 

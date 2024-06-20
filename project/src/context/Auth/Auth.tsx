@@ -1,9 +1,13 @@
-import { createContext, useState } from 'react';
+import { ReactNode, createContext, useState } from 'react';
 
-const AuthContext = createContext(null)
+const AuthContext = createContext({});
 
-const AuthProvider = ({ children }) => {
-  const [usuarioLogado, setUsuarioLogado] = useState(false); // Inicialmente, nenhum usuário está logado
+interface ContextProps{
+  children: ReactNode
+}
+
+const AuthProvider = ({ children }: ContextProps) => {
+  const [ usuarioLogado, setUsuarioLogado ] = useState<boolean>(false); // Inicialmente, nenhum usuário está logado
 
   return (
     <AuthContext.Provider value={{ usuarioLogado, setUsuarioLogado }}>

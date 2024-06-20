@@ -6,7 +6,9 @@ import logo from "../../assets/image/logo.png";
 export const HomeHeader = () => {
     return (
         <View style={styles.container}>
-            <Image style={styles.logo} resizeMode="contain" source={logo}/>
+            <View style={styles.logoBox}>
+                <Image style={styles.logo} resizeMode="contain" source={logo}/>
+            </View>
             <View style={styles.imageContainer}>
                 <ImageBackground style={styles.image} source={imagemBackGround} resizeMode="cover"/>
             </View>

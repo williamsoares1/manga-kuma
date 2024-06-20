@@ -6,10 +6,13 @@ export const styles = StyleSheet.create({
         backgroundColor: '#222',
     },
     logo: {
-        flex: 1,
-        width: 80,
-        height: 80,
+        width: 90,
+        height: 90,
     },
+    logoBox: {
+        flex: 1,
+        paddingHorizontal: 10
+    }, 
     imageContainer:{
         flex: 1,
         backgroundColor: 'blue',
