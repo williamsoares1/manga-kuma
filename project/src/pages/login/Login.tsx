@@ -27,7 +27,7 @@ interface UserData {
 const Login = ({ navigation }: NavigationProps) => {
   const [login, setLogin] = useState({ email: "", senha: "" });
   const [error, setError] = useState<string | null>(null);
-  const { handleLoginSuccess } = useContext(AuthContext);
+  const { handleLoginSuccess, handleUserData } = useContext(AuthContext);
 
   const handleSubmit = async () => {
     try {
@@ -39,7 +39,10 @@ const Login = ({ navigation }: NavigationProps) => {
       console.log(user);
 
       if (user.length > 0) {
-        alert("Login realizado com sucesso!");
+        // Por um Loading..
+        const userData = user[0];
+        // console.log(userData.email);
+        handleUserData(userData.nome, userData.email);
         handleLoginSuccess();
       } else {
         setError("Usuário ou senha inválidas");

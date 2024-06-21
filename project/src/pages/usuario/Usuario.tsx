@@ -1,12 +1,17 @@
 import { useContext } from "react";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import { AuthContext } from "../../context/AuthContext";
 import { styles } from "./style";
 import logonome from "../../assets/image/logonome.png";
-import { Button } from "../../components/Button";
+
+interface UserData {
+  nome: string;
+  email: string;
+}
 
 const Usuario = () => {
-  const { handleLogout } = useContext(AuthContext);
+  const { userData, handleLogout } = useContext(AuthContext);
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -23,9 +28,9 @@ const Usuario = () => {
 
       <View>
         <Text style={styles.label}>USUÁRIO</Text>
-        <Text style={styles.input}> E-mail Aqui</Text>
+        <Text style={styles.input}>{userData.nome ?? ""}</Text>
         <Text style={styles.label}>E-MAIL</Text>
-        <Text style={styles.input}> Senha Aqui</Text>
+        <Text style={styles.input}>{userData.email ?? ""}</Text>
       </View>
 
       {/* <View>
@@ -36,7 +41,7 @@ const Usuario = () => {
       <View
         style={{
           backgroundColor: "#fff",
-          width: 60,
+          width: "50%",
           borderRadius: 50,
           padding: 10,
           marginTop: 60,
@@ -51,7 +56,7 @@ const Usuario = () => {
           }}
           onPress={handleLogout}
         >
-          SAIR
+          Finalizar sessão
         </Text>
       </View>
     </View>
