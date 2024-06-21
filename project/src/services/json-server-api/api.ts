@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export const api = axios.create({
-  baseURL: "https://early-lizards-speak.loca.lt",
+  baseURL: "https://eleven-bikes-fix.loca.lt",
 });

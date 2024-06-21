@@ -1,8 +1,12 @@
-import StackRoutes from "./src/Routes/StackRoutes/StackRoutes";
+import Routes from "./src/Routes/Routes";
+import { AuthProvider } from "./src/context/AuthContext";
+
 
 function App() {
   return (
-    <StackRoutes/>
+    <AuthProvider>
+      <Routes/>
+    </AuthProvider>
   );
 }
 
