@@ -79,6 +79,7 @@ const Login = ({ navigation }: NavigationProps) => {
             placeholder="Digite seu e-mail!"
             textAlign="center"
             placeholderTextColor="gray"
+            autoCapitalize="none"
             value={login.email}
             onChangeText={(text) => setLogin({ ...login, email: text })}
           ></TextInput>
@@ -88,6 +89,7 @@ const Login = ({ navigation }: NavigationProps) => {
             placeholder="Digite sua senha!"
             textAlign="center"
             placeholderTextColor="gray"
+            autoCapitalize="none"
             secureTextEntry={true}
             value={login.senha}
             onChangeText={(text) => setLogin({ ...login, senha: text })}

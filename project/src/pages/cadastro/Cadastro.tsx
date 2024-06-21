@@ -66,6 +66,7 @@ const Cadastro = ({ navigation }: NavigationProps) => {
             style={styles.input}
             placeholder="Digite seu nome de usuário"
             placeholderTextColor="#FFFFFF"
+            autoCapitalize="none"
             value={name}
             onChangeText={(text) => setName(text)}
           />
@@ -78,6 +79,7 @@ const Cadastro = ({ navigation }: NavigationProps) => {
             style={styles.input}
             placeholder="Digite seu email"
             placeholderTextColor="#FFFFFF"
+            autoCapitalize="none"
             value={email}
             onChangeText={(text) => setEmail(text)}
           />
@@ -89,6 +91,7 @@ const Cadastro = ({ navigation }: NavigationProps) => {
             style={styles.input}
             placeholder="Digite sua senha"
             placeholderTextColor="#FFFFFF"
+            autoCapitalize="none"
             value={password}
             onChangeText={(text) => setPassword(text)}
             // secureTextEntry={true}
