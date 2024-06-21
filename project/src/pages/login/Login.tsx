@@ -1,84 +1,123 @@
-import { Text, TextInput, TouchableOpacity, View } from "react-native"
+import {
+  Image,
+  ImageBackground,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { styles } from "./style";
-import { Button } from "../../components/Button";
 import { useContext, useState } from "react";
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from "../../context/AuthContext";
 import { NavigationProp } from "@react-navigation/native";
 import { apiClientes } from "../../services/api-clientes/api";
+import personagem from "../../assets/image/bgPersonagemTelaLogin.png";
+import bgTela from "../../assets/image/bgTelaLogin.png";
+import botao from "../../assets/image/botaoVoltar.png";
 
 interface NavigationProps {
-    navigation: NavigationProp<any, any>;
+  navigation: NavigationProp<any, any>;
 }
 
 interface UserData {
-    email: string;
-    senha: string;
+  email: string;
+  senha: string;
 }
 
 const Login = ({ navigation }: NavigationProps) => {
-    const [login, setLogin] = useState({ email: '', senha: '' })
-    const [error, setError] = useState<string | null>(null);
-    const { handleLoginSuccess } = useContext(AuthContext);
+  const [login, setLogin] = useState({ email: "", senha: "" });
+  const [error, setError] = useState<string | null>(null);
+  const { handleLoginSuccess } = useContext(AuthContext);
 
+  const handleSubmit = async () => {
+    try {
+      const response = await apiClientes.get("/users");
+      const user = response.data.filter(
+        (data: UserData) =>
+          data.email === login.email && data.senha === login.senha
+      );
+      console.log(user);
 
-    const handleSubmit = async () => {
-        try {
-            const response = await apiClientes.get('/users')
-            const user = response.data.filter(
-                (data: UserData) => data.email === login.email && data.senha === login.senha)
-                // console.log(user)
-
-            if (user.length > 0) {
-                alert('Login realizado com sucesso!')
-                handleLoginSuccess()
-
-            } else {
-                setError('Usuário ou senha inválidas');
-                handleZerar()
-            }
-        } catch (error) {
-            setError('Erro ao realizar login');
-        }
+      if (user.length > 0) {
+        alert("Login realizado com sucesso!");
+        handleLoginSuccess();
+      } else {
+        setError("Usuário ou senha inválidas");
+        handleZerar();
+      }
+    } catch (error) {
+      setError("Erro ao realizar login");
     }
-    
-    const handleZerar = () => {
-        setLogin({ email: '', senha: '' });
-      };
+  };
 
-    return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Login</Text>
-            <TextInput
-                style={styles.input}
-                placeholder='E-mail'
-                value={login.email}
-                placeholderTextColor={'#888'}
-                onChangeText={(text) => setLogin({...login, email: text })}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder='Senha'
-                value={login.senha}
-                placeholderTextColor={'#888'}
-                onChangeText={(text) => setLogin({...login, senha: text })}
-            />
+  const handleZerar = () => {
+    setLogin({ email: "", senha: "" });
+  };
 
-            {error && <Text style={styles.error}>{error}</Text>}
+  return (
+    <View style={styles.container}>
+      <ImageBackground source={bgTela} style={styles.bgTela}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("login")}
+          style={styles.buttonVoltar}
+        >
+          <Image source={botao} style={styles.buttonImage} />
+        </TouchableOpacity>
 
-            <Button
-                title="Fazer login"
-                onPress={handleSubmit}
-                activeOpacity={0.7}
-            />
-
-            <Text style={{color: '#fff'}}>
-                Não tem conta?{'  '}
-                <TouchableOpacity onPress={() => navigation.navigate('cadastro')}>
-                    <Text style={{color: '#f1f1f1', fontSize: 20}}>Registrar</Text>
-                </TouchableOpacity>
-            </Text>
+        <View style={styles.loginContainer}>
+          <Text style={styles.loginText}>LOGIN !</Text>
+          <Text style={styles.welcomeText}>É um prazer ter você de volta!</Text>
         </View>
-    )
-}
 
-export default Login
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>E-mail</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Digite seu e-mail!"
+            textAlign="center"
+            placeholderTextColor="gray"
+            value={login.email}
+            onChangeText={(text) => setLogin({ ...login, email: text })}
+          ></TextInput>
+          <Text style={styles.label}>Senha</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Digite sua senha!"
+            textAlign="center"
+            placeholderTextColor="gray"
+            secureTextEntry={true}
+            value={login.senha}
+            onChangeText={(text) => setLogin({ ...login, senha: text })}
+          ></TextInput>
+
+          {error && <Text style={styles.error}>{error}</Text>}
+
+          <TouchableOpacity style={styles.buttonStyle}>
+            <Text style={styles.buttonText} onPress={handleSubmit}>
+              Entrar
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.textStyle}>
+          <Text style={styles.textFooter}> Não tem Login?</Text>
+          <Text style={styles.textFooter}> Você pode se cadastrar</Text>
+          <Text
+            style={styles.textClick}
+            onPress={() => navigation.navigate("cadastro")}
+          >
+            {" "}
+            Clicando aqui :D
+          </Text>
+        </View>
+
+        <ImageBackground
+          source={personagem}
+          style={styles.personagemContainer}
+        ></ImageBackground>
+      </ImageBackground>
+    </View>
+  );
+};
+
+export default Login;

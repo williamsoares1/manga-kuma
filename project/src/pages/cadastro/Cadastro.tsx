@@ -1,77 +1,112 @@
-import { Text, TextInput, TouchableOpacity, View } from "react-native"
+import {
+  Image,
+  ImageBackground,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { useState } from "react";
-import { styles } from "../login/style";
-import { Button } from "../../components/Button";
 import { NavigationProp } from "@react-navigation/native";
 import { apiClientes } from "../../services/api-clientes/api";
+import { styles } from "./styles";
+import inumaki from "../../assets/image/3.png";
+import botao from "../../assets/image/botaoVoltar.png";
 
 interface NavigationProps {
-    navigation: NavigationProp<any, any>;
+  navigation: NavigationProp<any, any>;
 }
 
 const Cadastro = ({ navigation }: NavigationProps) => {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState<string | null>(null);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    const handleSubmit = async () => {
-        try {
-        const response = await apiClientes.post("/users", {
-            nome: name,
-            email: email,
-            senha: password,
-        });
+  const handleSubmit = async () => {
+    try {
+      const response = await apiClientes.post("/users", {
+        nome: name,
+        email: email,
+        senha: password,
+      });
 
-        setName("");
-        setEmail("");
-        setPassword("");
-        alert('Usuário cadastrado com sucesso!')
-            
-        if (response.status === 201) {
-            navigation.navigate('login')
-        }
-        } catch (error) {
-            setError("Erro ao cadastrar usuário:");
-        }
-    };
+      if (!name || !email || !password) {
+        alert("Todos os campos são obrigatório!");
+        return;
+      }
 
+      setName("");
+      setEmail("");
+      setPassword("");
+      alert("Usuário cadastrado com sucesso!");
 
+      if (response.status === 201) {
+        navigation.navigate("login");
+      }
+    } catch (error) {
+      alert("Erro ao cadastrar usuário:");
+    }
+  };
 
-    return (
-        <View style={styles.container}>
-        <Text style={styles.title}>Cadastrar</Text>
-        <TextInput
+  const image = require("../../assets/image/2.png");
+
+  return (
+    <ImageBackground source={image} style={styles.fundo}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("login")}
+        style={styles.buttonVoltar}
+      >
+        <Image source={botao} style={styles.buttonImage} />
+      </TouchableOpacity>
+      <View style={styles.container}>
+        {/* Input 1 */}
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputLabel}>NOME DE USUÁRIO</Text>
+          <TextInput
             style={styles.input}
-            placeholder='Nome de usuário'
+            placeholder="Digite seu nome de usuário"
+            placeholderTextColor="#FFFFFF"
             value={name}
-            placeholderTextColor={'#888'}
             onChangeText={(text) => setName(text)}
-        />
-        <TextInput
+          />
+        </View>
+
+        {/* Input 2 */}
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputLabel}>EMAIL</Text>
+          <TextInput
             style={styles.input}
-            placeholder='E-mail'
+            placeholder="Digite seu email"
+            placeholderTextColor="#FFFFFF"
             value={email}
-            placeholderTextColor={'#888'}
             onChangeText={(text) => setEmail(text)}
-        />
-        <TextInput
+          />
+        </View>
+        {/* Input 3 */}
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputLabel}>SENHA</Text>
+          <TextInput
             style={styles.input}
-            placeholder='Senha'
+            placeholder="Digite sua senha"
+            placeholderTextColor="#FFFFFF"
             value={password}
-            placeholderTextColor={'#888'}
             onChangeText={(text) => setPassword(text)}
-        />
+            // secureTextEntry={true}
+          />
+        </View>
 
-        {error && <Text style={styles.error}>{error}</Text>}
+        {/* Imagem e botão de cadastro */}
+        <View style={styles.containerinumaki}>
+          <Image style={styles.inumaki} source={inumaki} />
+          <TouchableOpacity>
+            <Text onPress={handleSubmit} style={styles.cadastrodoinumaki}>
+              CADASTRAR
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </ImageBackground>
+  );
+};
 
-        <Button
-            title="Cadastrar"
-            onPress={handleSubmit}
-            activeOpacity={0.7}
-        />
-    </View>
-    )
-}
-
-export default Cadastro
+export default Cadastro;
