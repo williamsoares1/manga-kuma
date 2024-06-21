@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { TabRoutes } from "./TabRoutes";
 import Login from "../pages/login/Login";
 import Cadastro from "../pages/cadastro/Cadastro";
+import Inicio from "../pages/inicio/Inicio";  // Importe a nova tela
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -17,9 +18,13 @@ function Routes() {
   useEffect(() => {
     setEstaLogado(user);
   }, [user]);
+
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+        {/* Adicione a tela Inicio como a tela inicial */}
+        <Stack.Screen name="inicio" component={Inicio} />
+
         {estaLogado ? (
           <>
             <Tab.Screen name="tabs" component={TabRoutes} />

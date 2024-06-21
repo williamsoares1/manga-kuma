@@ -27,7 +27,7 @@
     [
       "expo-font",
       {
-        "fonts": ["./src/assets/fonts/Teko-VariableFont_wght.ttf"]
+        "fonts": ["./src/assets/fonts/PlayfairDisplay-VariableFont_wght.ttf", "./src/assets/fonts/Knewave-Regular.ttf" ,"./src/assets/fonts/BebasNeue-Regular.ttf"]
       }
     ]
     ]

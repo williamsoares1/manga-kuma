@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 
 const apiClientes = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'https://json-server.serveo.net',
 });
 
 export default apiClientes;
