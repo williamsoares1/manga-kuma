@@ -3,7 +3,7 @@ import { useState } from "react";
 import { styles } from "../login/style";
 import { Button } from "../../components/Button";
 import { NavigationProp } from "@react-navigation/native";
-import apiClientes from "../../services/api-clientes/api";
+import { apiClientes } from "../../services/api-clientes/api";
 
 interface NavigationProps {
     navigation: NavigationProp<any, any>;

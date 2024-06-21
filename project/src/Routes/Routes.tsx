@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { TabRoutes } from "./TabRoutes";
 import Login from "../pages/login/Login";
 import Cadastro from "../pages/cadastro/Cadastro";
+import { MangaEsp } from "../pages/mangaEsp/mangaEsp";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -19,8 +20,8 @@ function Routes() {
   }, [user]);
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {estaLogado ? (
+      <Stack.Navigator screenOptions={{ headerShown: true, headerTitle: "", headerStatusBarHeight: 0}}>
+        {!estaLogado ? (
           <>
             <Tab.Screen name="tabs" component={TabRoutes} />
           </>
@@ -30,7 +31,7 @@ function Routes() {
             <Stack.Screen name="cadastro" component={Cadastro} />
           </>
         )}
-        {/* <Stack.Screen name="Detalhes da obra" component={MangaEsp} /> */}
+        <Stack.Screen name="Detalhes da obra" component={MangaEsp} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -22,7 +22,7 @@ export const MangaCard = ({ item, ...rest }: MangaCardProps) => {
                             {item.description != '' ? transformarTexto(item.description, 60): "Descrição não disponivel"}
                         </Text>
                         <View style={styles.detailBox}>
-                            <Text style={{color: '#ff66c4'}}>{item.view}</Text>
+                            <Text style={{color: '#FF8FD4'}}>{item.view}</Text>
                             <Text style={styles.button}>{transformarTexto(item.chapter, 11)}</Text>
                         </View>
                     </View>

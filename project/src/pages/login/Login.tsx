@@ -4,7 +4,7 @@ import { Button } from "../../components/Button";
 import { useContext, useState } from "react";
 import { AuthContext } from '../../context/AuthContext';
 import { NavigationProp } from "@react-navigation/native";
-import apiClientes from "../../services/api-clientes/api";
+import { apiClientes } from "../../services/api-clientes/api";
 
 interface NavigationProps {
     navigation: NavigationProp<any, any>;

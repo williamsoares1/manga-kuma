@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, ActivityIndicator, ScrollView, TextInput } from 'react-native';
+import { FlatList, ActivityIndicator, ScrollView, TextInput } from 'react-native';
 import { api } from '../../services/mangahook-api/api';
 import { MangaCard } from '../../components/MangaCard/MangaCard';
 import { HomeHeader } from '../../components/HomeHeader/HomeHeader';
 import { Nav } from '../../components/Nav/Nav';
 import { PaginationButtons } from '../../components/PaginationButtons/PaginationButtons';
+import { MangaList } from '../../components/MangaList/MangaList';
 
 export interface MangaItem {
   id: string,
@@ -24,6 +25,7 @@ export const Filters = {
 
 export const Home = ({ navigation }) => {
   const [mangas, setMangas] = useState<MangaItem[]>([]);
+  const [categories, setCategories] = useState();
   const [totalPages, setTotalPages] = useState<number>(0);
   const [filter, setFilter] = useState(Filters.ALL);
   const [search, setSearch] = useState('');
@@ -32,6 +34,7 @@ export const Home = ({ navigation }) => {
 
   const getMangas = async (type, pageNum, param) => {
     setLoading(true);
+
     try {
       let response;
       switch (type) {
@@ -42,13 +45,14 @@ export const Home = ({ navigation }) => {
           response = await api.get(`/api/mangaList?state=Completed&page=${pageNum}`);
           break;
         case Filters.CATEGORY:
-          response = await api.get(`/api/mangaList?category=Comedy&page=${pageNum}`);
+          response = await api.get(`/api/mangaList?category=${param}&page=${pageNum}`);
           break;
         case Filters.ALL:
         default:
           response = await api.get(`/api/mangaList?page=${pageNum}`);
           break;
       }
+
       setTotalPages(response.data.metaData.totalPages);
       setMangas(response.data.mangaList);
     } catch (error) {
@@ -57,16 +61,20 @@ export const Home = ({ navigation }) => {
     setLoading(false);
   };
 
+  const getCategories = async () => {
+    const response = await api.get("/api/mangaList")
+    setCategories(response.data.metaData.category);
+  }
+
+  useEffect(() => {
+    getCategories();
+  }, [])
+
   useEffect(() => {
     getMangas(filter, page, search);
   }, [page, filter, search]);
 
-  const handleFilterChange = (filter) => {
-    setFilter(filter);
-    setPage(1);
-  };
-
-  const handleSearchChange = (filter, param) => {
+  const handleFilterChange = (filter, param) => {
     setFilter(filter);
     setSearch(param);
     setPage(1);
@@ -86,21 +94,12 @@ export const Home = ({ navigation }) => {
     <ScrollView style={{ flex: 1, backgroundColor: '#222' }}>
       <HomeHeader />
       <Nav
-        forSearch={(param) => handleSearchChange(Filters.SEARCH, param)}
-        forFilter={(type) => handleFilterChange(type)}
+        func={(type, param) => handleFilterChange(type, param)}
+        navigation={navigation.navigate}
+        categories={categories}
       />
       {loading ? <ActivityIndicator size="large" /> :
-        <FlatList
-          data={mangas}
-          renderItem={({ item }) =>
-            <MangaCard item={item}
-              onPress={() => navigation.navigate('Detalhes da obra', { mangaId: item.id })}
-            />
-          }
-          keyExtractor={(item) => item.id.toString()}
-          scrollEnabled={false}
-          style={{ padding: 10 }}
-        />
+        <MangaList mangas={mangas} navigation={navigation.navigate}/>
       }
       <PaginationButtons page={page} totalPages={totalPages} func={handlePageChange}/>
     </ScrollView>

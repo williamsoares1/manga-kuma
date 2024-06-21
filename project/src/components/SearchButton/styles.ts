@@ -4,10 +4,10 @@ export const styles = StyleSheet.create({
     button: {
         flex: 1,
         width: '100%',
-        paddingHorizontal: 5,
+        paddingHorizontal: 15,
         paddingVertical: 2,
         borderRadius: 25,
-        borderColor: '#fff',
+        borderColor: '#964F7B',
         borderWidth: 2,
         marginHorizontal: 5,
     },
