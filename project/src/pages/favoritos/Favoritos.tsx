@@ -1,11 +1,42 @@
-import { Text, View } from "react-native"
+import {
+  ActivityIndicator,
+  FlatList,
+  ScrollView,
+  Text,
+  View,
+} from "react-native";
+import { MangaCard } from "../../components/MangaCard/MangaCard";
+import { HomeHeader } from "../../components/HomeHeader/HomeHeader";
+import { PaginationButtons } from "../../components/PaginationButtons/PaginationButtons";
+import { useState } from "react";
 
-const Favoritos = () => {
-    return (
-        <View style={{flex: 1, paddingTop: 60, alignItems: 'center'}}>
-            <Text style={{fontSize: 30}}>Favoritos </Text>
-        </View>
-    )
-}
+const Favoritos = ({ navigation }) => {
+  const [favoritos, setFavoritos] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-export default Favoritos
+  return (
+    <ScrollView style={{ flex: 1, backgroundColor: "#222" }}>
+      <HomeHeader />
+      {loading ? (
+        <ActivityIndicator size="large" />
+      ) : (
+        <FlatList
+          data={favoritos}
+          renderItem={({ item }) => (
+            <MangaCard
+              item={item}
+              onPress={() =>
+                navigation.navigate("Detalhes da obra", { mangaId: item.id })
+              }
+            />
+          )}
+          keyExtractor={(item) => item.id.toString()}
+          scrollEnabled={false}
+          style={{ padding: 10 }}
+        />
+      )}
+    </ScrollView>
+  );
+};
+
+export default Favoritos;

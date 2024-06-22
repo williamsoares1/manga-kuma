@@ -7,19 +7,19 @@ import { PaginationHomeButtons } from '../../components/PaginationHomeButtons/Pa
 import { MangaList } from '../../components/MangaList/MangaList';
 
 export interface MangaItem {
-  id: string,
-  image: string,
-  title: string,
-  chapter: string,
-  description: string,
-  view: string
+  id: string;
+  image: string;
+  title: string;
+  chapter: string;
+  description: string;
+  view: string;
 }
 
 export const Filters = {
-  ALL: 'ALL',
-  SEARCH: 'SEARCH',
-  STATE: 'STATE',
-  CATEGORY: 'CATEGORY'
+  ALL: "ALL",
+  SEARCH: "SEARCH",
+  STATE: "STATE",
+  CATEGORY: "CATEGORY",
 };
 
 export const Home = ({ navigation }) => {
@@ -27,7 +27,7 @@ export const Home = ({ navigation }) => {
   const [categories, setCategories] = useState();
   const [totalPages, setTotalPages] = useState<number>(0);
   const [filter, setFilter] = useState(Filters.ALL);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
@@ -41,10 +41,14 @@ export const Home = ({ navigation }) => {
           response = await api.get(`/api/search/${param}?page=${pageNum}`);
           break;
         case Filters.STATE:
-          response = await api.get(`/api/mangaList?state=Completed&page=${pageNum}`);
+          response = await api.get(
+            `/api/mangaList?state=Completed&page=${pageNum}`
+          );
           break;
         case Filters.CATEGORY:
-          response = await api.get(`/api/mangaList?category=${param}&page=${pageNum}`);
+          response = await api.get(
+            `/api/mangaList?category=${param}&page=${pageNum}`
+          );
           break;
         case Filters.ALL:
         default:
@@ -61,13 +65,13 @@ export const Home = ({ navigation }) => {
   };
 
   const getCategories = async () => {
-    const response = await api.get("/api/mangaList")
+    const response = await api.get("/api/mangaList");
     setCategories(response.data.metaData.category);
-  }
+  };
 
   useEffect(() => {
     getCategories();
-  }, [])
+  }, []);
 
   useEffect(() => {
     getMangas(filter, page, search);
@@ -80,17 +84,17 @@ export const Home = ({ navigation }) => {
   };
 
   const handlePageChange = (direction) => {
-    if (direction === 'next' && page < totalPages) {
+    if (direction === "next" && page < totalPages) {
       setPage(page + 1);
-    } else if (direction === 'prev' && page > 1) {
+    } else if (direction === "prev" && page > 1) {
       setPage(page - 1);
-    } else if (direction === 'reset') {
+    } else if (direction === "reset") {
       setPage(1);
     }
   };
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: '#222' }}>
+    <ScrollView style={{ flex: 1, backgroundColor: "#222" }}>
       <HomeHeader />
       <Nav categories={categories}
       func={(type, param) => handleFilterChange(type, param)}

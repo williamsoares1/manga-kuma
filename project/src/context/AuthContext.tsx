@@ -1,45 +1,34 @@
 import { ReactNode, createContext, useState } from "react";
 
 interface AuthType {
-  user: boolean;
   userData: {};
-  handleLoginSuccess: () => void;
+  handleLogin: (nome: string, email: string) => void;
   handleLogout: () => void;
-  handleUserData: (nome: string, email: string) => void;
 }
 
 export const AuthContext = createContext<AuthType>({
-  user: false,
   userData: {},
-  handleLoginSuccess: () => {},
+  handleLogin: () => {},
   handleLogout: () => {},
-  handleUserData: () => {},
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState(false);
   const [userData, setUserData] = useState({});
 
-  const handleLoginSuccess = () => {
-    setUser(true);
+  const handleLogin = (nome: string, email: string) => {
+    setUserData({ nome, email });
   };
 
   const handleLogout = async () => {
-    setUser(false);
-  };
-
-  const handleUserData = (nome: string, email: string) => {
-    setUserData({ nome, email });
+    setUserData({});
   };
 
   return (
     <AuthContext.Provider
       value={{
-        user,
         userData,
-        handleLoginSuccess,
+        handleLogin,
         handleLogout,
-        handleUserData,
       }}
     >
       {children}
