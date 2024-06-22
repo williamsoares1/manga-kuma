@@ -62,9 +62,12 @@ export const MangaEsp = ({ route, navigation }) => {
           <CallnText call='Views:' text={manga?.view}/>
         </View>
       </View>
+
+      {/* Botao de favoritar */}
       <TouchableOpacity activeOpacity={0.8} style={styles.mangaFav}>
         <Text style={styles.iconFav}><Fontisto name="favorite" size={24} color="#eee"/></Text>
       </TouchableOpacity>
+      
       <View style={styles.chapterContainer}>
         <Text style={styles.title}>Capitulos: </Text>
         <FlatList
