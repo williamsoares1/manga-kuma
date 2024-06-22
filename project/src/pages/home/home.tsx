@@ -93,11 +93,11 @@ export const Home = ({ navigation }) => {
   return (
     <ScrollView style={{ flex: 1, backgroundColor: '#222' }}>
       <HomeHeader />
-      <Nav
-        func={(type, param) => handleFilterChange(type, param)}
-        navigation={navigation.navigate}
-        categories={categories}
+
+      <Nav categories={categories}
+      func={(type, param) => handleFilterChange(type, param)}
       />
+
       {loading ? <ActivityIndicator size="large" /> :
         <MangaList mangas={mangas} navigation={navigation.navigate}/>
       }

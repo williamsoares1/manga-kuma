@@ -2,7 +2,7 @@ import { Text, TouchableOpacity } from "react-native"
 import { styles } from "./styles"
 
 interface SearchButtonProps {
-    content: string | {}
+    content: string | undefined
 }
 
 export const SearchButton = ({ content, ...rest }: SearchButtonProps) => {

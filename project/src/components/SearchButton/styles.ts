@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
         borderColor: '#964F7B',
         borderWidth: 2,
         marginHorizontal: 5,
+        backgroundColor: '#222'
     },
     text: {
         flex: 1,

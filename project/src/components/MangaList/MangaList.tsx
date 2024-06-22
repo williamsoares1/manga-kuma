@@ -10,8 +10,8 @@ export const MangaList = ({ navigation, mangas, ...rest }) => {
         data={mangas}
         renderItem={({ item }) =>
           <MangaCard item={item}
-        onPress={() => navigation('Detalhes da obra', { mangaId: item.id })}
-        />
+            onPress={() => navigation('Detalhes da obra', { mangaId: item.id })}
+          />
         }
         keyExtractor={(item) => item.id.toString()}
         scrollEnabled={false}

@@ -30,7 +30,7 @@ export const MangaCard = ({ item, ...rest }: MangaCardProps) => {
             :
                 <TouchableOpacity activeOpacity={0.7} style={styles.filterEstructure}>
                     <Image resizeMode="contain" style={styles.image} source={{uri: item.image}}/>
-                    <Text style={{color: '#fff'}}>{transformarTexto(item.title, 30)}</Text>
+                    <Text style={{color: '#fff'}}>{transformarTexto(item.title, 15)}</Text>
                     <Text {...rest} style={styles.button}>Ver Mais...</Text>
                 </TouchableOpacity>
             }
