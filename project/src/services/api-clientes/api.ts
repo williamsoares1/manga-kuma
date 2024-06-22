@@ -1,7 +1,5 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 
-const apiClientes = axios.create({
-  baseURL: 'http://localhost:3000',
+export const apiClientes = axios.create({
+  baseURL: 'https://json-server.serveo.net',
 });
-
-export default apiClientes;

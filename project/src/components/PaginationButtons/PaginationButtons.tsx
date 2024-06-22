@@ -1,5 +1,6 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
+import { AntDesign } from '@expo/vector-icons';
 
 export const PaginationButtons = ({page, totalPages, func}) => {
     return (
@@ -8,7 +9,7 @@ export const PaginationButtons = ({page, totalPages, func}) => {
             <View style={styles.buttonContainer}>
                 {page > 1 &&
                 <TouchableOpacity activeOpacity={0.7} style={styles.button} onPress={() => func('prev')}>
-                    <Text style={styles.text}>Prev</Text>
+                    <Text style={styles.text}><AntDesign name="arrowleft" size={24} color="white"/></Text>
                 </TouchableOpacity>
                 }
 
@@ -16,7 +17,7 @@ export const PaginationButtons = ({page, totalPages, func}) => {
 
                 {page < totalPages && 
                 <TouchableOpacity activeOpacity={0.7} style={styles.button} onPress={() => func('next')}>
-                    <Text style={styles.text}>Prox</Text>
+                    <Text style={styles.text}><AntDesign name="arrowright" size={24} color="white" /></Text>
                 </TouchableOpacity>
                 }
             </View>

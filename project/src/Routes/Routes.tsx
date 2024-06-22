@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { TabRoutes } from "./TabRoutes";
 import Login from "../pages/login/Login";
 import Cadastro from "../pages/cadastro/Cadastro";
+import { Capitulo } from "../pages/capitulo/Capitulo";
 import { MangaEsp } from "../pages/mangaEsp/mangaEsp";
 
 const Tab = createBottomTabNavigator();
@@ -24,6 +25,7 @@ function Routes() {
           <>
             <Tab.Screen name="tabs" component={TabRoutes} />
             <Stack.Screen name="Detalhes da obra" component={MangaEsp} />
+            <Stack.Screen name="Capitulo" component={Capitulo} />
           </>
         ) : (
           <>

@@ -5,38 +5,42 @@ export const styles = StyleSheet.create({
         backgroundColor: '#222',
         padding: 10,
         flex: 1,
-        flexDirection: "row",
-        marginVertical: 8,
-        borderColor: '#fff',
-        borderWidth: 1,
+        margin: 5,
+        borderColor: '#aaa',
+        borderWidth: 2,
         borderRadius: 8,
+        alignItems: 'center',
+        gap: 10
     },
     image: {
-        width: 150,
-        height: 150
+        flex: 1,
+        width: '100%',
+        minHeight: 250,
+        maxHeight: 250
     },
     detailBox: {
+        flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'flex-end',
-
     },
     detailContainer: {
         flex: 1,
-        padding: 5,
         justifyContent: 'space-between',
+        width: '100%',
+        gap: 10
     },
     button: {
-        backgroundColor: '#222',
-        width: 180,
+        backgroundColor: '#964F7B',
+        width: 135,
         height: 40,
         textAlignVertical: 'center',
         paddingHorizontal: 20,
         borderRadius: 5,
         textAlign: 'center',
-        borderColor: '#fff',
-        borderWidth: 2,
+        fontWeight: 'bold',
         color: '#fff',
+        fontSize: 12
     },
     filterEstructure: {
         backgroundColor: '#222',
@@ -45,9 +49,9 @@ export const styles = StyleSheet.create({
         flexDirection: "column",
         alignItems: 'center',
         gap: 15,
-        marginVertical: 15,
-        borderColor: '#fff',
-        borderWidth: 1,
+        margin: 5,
+        borderColor: '#aaa',
+        borderWidth: 2,
         borderRadius: 8,
         width: 250,
         alignSelf: 'center',
