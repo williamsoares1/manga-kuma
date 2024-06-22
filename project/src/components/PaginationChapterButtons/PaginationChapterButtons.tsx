@@ -2,21 +2,20 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 import { AntDesign } from '@expo/vector-icons';
 
-export const PaginationButtons = ({page, totalPages, func}) => {
+export const PaginationChapterButtons = ({index, list, func, currentChapter}) => {
     return (
         <View style={styles.container}>
-            {page != 1 && <Text style={styles.text} onPress={() => func('reset')}>Ir para Pagina 1</Text>}
             <View style={styles.buttonContainer}>
-                {page > 1 &&
-                <TouchableOpacity activeOpacity={0.7} style={styles.button} onPress={() => func('prev')}>
+                {index != list.length - 1 &&
+                <TouchableOpacity activeOpacity={0.7} style={styles.button} onPress={() => func("prev")}>
                     <Text style={styles.text}><AntDesign name="arrowleft" size={24} color="white"/></Text>
                 </TouchableOpacity>
                 }
 
-                <Text style={styles.text}>Pagina: {page}</Text>
+                <Text style={styles.text}>{currentChapter}</Text>
 
-                {page < totalPages && 
-                <TouchableOpacity activeOpacity={0.7} style={styles.button} onPress={() => func('next')}>
+                {index != 0 && 
+                <TouchableOpacity activeOpacity={0.7} style={styles.button} onPress={() => func("next")}>
                     <Text style={styles.text}><AntDesign name="arrowright" size={24} color="white" /></Text>
                 </TouchableOpacity>
                 }
