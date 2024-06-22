@@ -10,8 +10,8 @@ export const styles = StyleSheet.create({
     flex: 1,
     resizeMode: 'cover', 
     position: 'absolute', 
-    width: '100%', 
-    height: '100%', 
+    minWidth: '100%', 
+    minHeight: '100%', 
   },
   inputContainer: {
     alignItems: 'center',

@@ -22,7 +22,7 @@ export const MangaCard = ({ item, ...rest }: MangaCardProps) => {
                             {item.description != '' ? transformarTexto(item.description, 60): "Descrição não disponivel"}
                         </Text>
                         <View style={styles.detailBox}>
-                            <Text style={{color: '#ff66c4'}}>{item.view}</Text>
+                            <Text style={{color: '#FF8FD4'}}>{item.view}</Text>
                             <Text style={styles.button}>{transformarTexto(item.chapter, 11)}</Text>
                         </View>
                     </View>
@@ -30,7 +30,7 @@ export const MangaCard = ({ item, ...rest }: MangaCardProps) => {
             :
                 <TouchableOpacity activeOpacity={0.7} style={styles.filterEstructure}>
                     <Image resizeMode="contain" style={styles.image} source={{uri: item.image}}/>
-                    <Text style={{color: '#fff'}}>{transformarTexto(item.title, 30)}</Text>
+                    <Text style={{color: '#fff'}}>{transformarTexto(item.title, 15)}</Text>
                     <Text {...rest} style={styles.button}>Ver Mais...</Text>
                 </TouchableOpacity>
             }

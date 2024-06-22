@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { useState } from "react";
 import { NavigationProp } from "@react-navigation/native";
-import apiClientes from "../../services/api-clientes/api";
+import { apiClientes } from "../../services/api-clientes/api";
 import { styles } from "./styles";
 import inumaki from "../../assets/image/3.png";
 import botao from "../../assets/image/botaoVoltar.png";

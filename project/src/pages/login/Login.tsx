@@ -10,7 +10,7 @@ import { styles } from "./style";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { NavigationProp } from "@react-navigation/native";
-import apiClientes from "../../services/api-clientes/api";
+import { apiClientes} from "../../services/api-clientes/api";
 import personagem from "../../assets/image/bgPersonagemTelaLogin.png";
 import bgTela from "../../assets/image/bgTelaLogin.png";
 import botao from "../../assets/image/botaoVoltar.png";

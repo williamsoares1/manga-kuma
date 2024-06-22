@@ -10,11 +10,9 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         paddingVertical: 20,
         marginTop: 20,
-        borderColor: '#fff',
-        borderTopWidth: 2
     },
     text: {
-        color: '#fff',
+        color: '#FF8FD4',
         fontWeight: '600',
         textTransform: 'uppercase',
         textAlignVertical: 'center',
@@ -24,9 +22,5 @@ export const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 20,
         backgroundColor: '#222',
-        borderColor: '#fff',
-        borderWidth: 2,
-        borderRadius: 20,
-        color: '#fff'
     },
 })

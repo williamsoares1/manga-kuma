@@ -6,6 +6,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { TabRoutes } from "./TabRoutes";
 import Login from "../pages/login/Login";
 import Cadastro from "../pages/cadastro/Cadastro";
+import { MangaEsp } from "../pages/mangaEsp/mangaEsp";
+import { Capitulo } from "../pages/capitulo/Capitulo";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -19,18 +21,20 @@ function Routes() {
   }, [user]);
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {estaLogado ? (
+      <Stack.Navigator screenOptions={{ headerShown: false}}>
+        {!estaLogado ? (
           <>
             <Tab.Screen name="tabs" component={TabRoutes} />
           </>
+          
         ) : (
           <>
             <Stack.Screen name="login" component={Login} />
             <Stack.Screen name="cadastro" component={Cadastro} />
           </>
         )}
-        {/* <Stack.Screen name="Detalhes da obra" component={MangaEsp} /> */}
+        <Stack.Screen name="Detalhes da obra" component={MangaEsp} />
+        <Stack.Screen name="Capitulo" component={Capitulo} />
       </Stack.Navigator>
     </NavigationContainer>
   );

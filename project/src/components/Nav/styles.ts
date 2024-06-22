@@ -2,25 +2,23 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     container:{
-        padding: 10,
-        marginTop: 17,
-        borderTopWidth: 4,
-        borderColor: '#fff',
+        marginTop: 15,
         gap: 15
     },
     inputBox: {
+        marginHorizontal: 10,
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         borderRadius: 25,
-        borderColor: '#fff',
+        borderColor: '#964F7B',
         borderTopWidth: 3,
         borderBottomWidth: 3,
         borderLeftWidth: 3,
         borderRightWidth: 3,
     },
     input: {
-        backgroundColor: '#fff',
+        backgroundColor: '#ddd',
         flex: 1,
         height: 50,
         paddingHorizontal: 20,
@@ -33,7 +31,7 @@ export const styles = StyleSheet.create({
 
     },
     searchIconBox: {
-        backgroundColor: '#fff',
+        backgroundColor: '#ddd',
         justifyContent: 'center',
         height: 50,
         paddingHorizontal: 9,
@@ -44,8 +42,4 @@ export const styles = StyleSheet.create({
         borderBottomWidth: 4,
         borderRightWidth: 4,
     },
-    searchContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-around'
-    }
 })
