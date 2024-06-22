@@ -6,35 +6,33 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { TabRoutes } from "./TabRoutes";
 import Login from "../pages/login/Login";
 import Cadastro from "../pages/cadastro/Cadastro";
-import { MangaEsp } from "../pages/mangaEsp/mangaEsp";
 import { Capitulo } from "../pages/capitulo/Capitulo";
+import { MangaEsp } from "../pages/mangaEsp/mangaEsp";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 function Routes() {
-  const { user } = useContext(AuthContext);
-  const [estaLogado, setEstaLogado] = useState(user);
+  const { userData } = useContext(AuthContext);
+  const logado = Object.keys(userData).length !== 0;
 
-  useEffect(() => {
-    setEstaLogado(user);
-  }, [user]);
+  useEffect(() => {}, [userData]);
+
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false}}>
-        {!estaLogado ? (
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        {logado ? (
           <>
             <Tab.Screen name="tabs" component={TabRoutes} />
+            <Stack.Screen name="Detalhes da obra" component={MangaEsp} />
+            <Stack.Screen name="Capitulo" component={Capitulo} />
           </>
-          
         ) : (
           <>
             <Stack.Screen name="login" component={Login} />
             <Stack.Screen name="cadastro" component={Cadastro} />
           </>
         )}
-        <Stack.Screen name="Detalhes da obra" component={MangaEsp} />
-        <Stack.Screen name="Capitulo" component={Capitulo} />
       </Stack.Navigator>
     </NavigationContainer>
   );
