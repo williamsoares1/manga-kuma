@@ -3,25 +3,26 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 60,
+    marginTop: 30,
     alignItems: 'center',
   },
   fundo: {
     flex: 1,
+    marginTop: 10,
     resizeMode: 'cover', 
-    position: 'absolute', 
-    minWidth: '100%', 
-    minHeight: '100%', 
+    width: '100%', 
+    height: '100%', 
   },
   inputContainer: {
     alignItems: 'center',
+    marginTop: 15,
     width: '80%',
-    marginBottom: 5,
+    marginBottom: 1,
     
   },
   inputLabel: {
     color: 'black',
-    marginBottom: 8,
+    marginBottom: 0,
     fontSize: 16,
     fontWeight: 'bold',
   },
@@ -33,39 +34,27 @@ export const styles = StyleSheet.create({
     backgroundColor: 'black',
     color: '#FFFFFF',
     borderRadius: 50,
-    fontWeight: 'bold',
-    borderWidth: 6,
-    borderColor: '#ccc',
   },
-  inumaki: {
+ inumaki: {
     width: '100%',
     height: '100%',
-    marginLeft: -76,
-    // marginTop: -35
+    marginLeft: -89, 
+    marginTop: -26
   },
   containerinumaki: {
-    width: 330,
-    height: 430,
+    width: 390,
+    height: 490,
   },
   cadastrodoinumaki: {
-    marginTop: -355,
-    marginLeft: 110,
+    marginTop: -405,
+    marginLeft: 138,
     fontSize: 21,
     fontWeight: 'bold'
   },
   error: {
-    color: 'red',
-    marginBottom: 20,
+    color: '#ff8fd4',
+    fontSize: 13,
+    fontWeight: 'bold',
   },
-  buttonVoltar:{
-    marginBottom: -100
-},
-
-buttonImage:{
-    width: 75,
-    height: 80,
-    resizeMode: 'contain',
-    marginVertical:10
-},
   
 });
