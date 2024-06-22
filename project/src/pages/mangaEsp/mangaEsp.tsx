@@ -5,6 +5,7 @@ import { styles } from './styles';
 import { CallnText } from '../../components/CallnText/CallnText';
 import { ChapterButton } from '../../components/ChapterButton/ChapterButton';
 import { Fontisto } from '@expo/vector-icons';
+import { HomeHeader } from '../../components/HomeHeader/HomeHeader';
 
 interface MangaItem{
   imageUrl: string,
@@ -35,7 +36,7 @@ export const MangaEsp = ({ route, navigation }) => {
       const response = await api.get(`/api/manga/${mangaId}`)
       setManga(response.data);
     } catch (error) {
-      console.error(error);
+      console.error("Aqui", error);
     }
     setLoading(false);
   };
@@ -50,6 +51,7 @@ export const MangaEsp = ({ route, navigation }) => {
 
   return (
     <ScrollView style={{ paddingVertical: 30, backgroundColor: '#222' }}>
+      <HomeHeader/>
       <View style={styles.mangaEspecify}>
         <Image source={{ uri: manga?.imageUrl }} style={{ flex: 1, width: 200, height: 300, resizeMode: 'contain' }}/>
         <View style={{flex: 1, justifyContent: 'space-around'}}>
@@ -60,14 +62,17 @@ export const MangaEsp = ({ route, navigation }) => {
           <CallnText call='Views:' text={manga?.view}/>
         </View>
       </View>
+
+      {/* Botao de favoritar */}
       <TouchableOpacity activeOpacity={0.8} style={styles.mangaFav}>
         <Text style={styles.iconFav}><Fontisto name="favorite" size={24} color="#eee"/></Text>
       </TouchableOpacity>
+      
       <View style={styles.chapterContainer}>
         <Text style={styles.title}>Capitulos: </Text>
         <FlatList
           data={manga?.chapterList}
-          renderItem={({ item }) => <ChapterButton item={item} func={navigation.navigate}/>}
+          renderItem={({ item }) => <ChapterButton mangaId={mangaId} item={item} func={navigation.navigate}/>}
           scrollEnabled={false}
         />
       </View>

@@ -1,16 +1,10 @@
-import React, { useState, useEffect } from "react";
-import {
-  FlatList,
-  ActivityIndicator,
-  ScrollView,
-  TextInput,
-} from "react-native";
-import { api } from "../../services/mangahook-api/api";
-import { MangaCard } from "../../components/MangaCard/MangaCard";
-import { HomeHeader } from "../../components/HomeHeader/HomeHeader";
-import { Nav } from "../../components/Nav/Nav";
-import { PaginationButtons } from "../../components/PaginationButtons/PaginationButtons";
-import { MangaList } from "../../components/MangaList/MangaList";
+import React, { useState, useEffect } from 'react';
+import { ActivityIndicator, ScrollView } from 'react-native';
+import { api } from '../../services/mangahook-api/api';
+import { HomeHeader } from '../../components/HomeHeader/HomeHeader';
+import { Nav } from '../../components/Nav/Nav';
+import { PaginationHomeButtons } from '../../components/PaginationHomeButtons/PaginationHomeButtons';
+import { MangaList } from '../../components/MangaList/MangaList';
 
 export interface MangaItem {
   id: string;
@@ -102,22 +96,14 @@ export const Home = ({ navigation }) => {
   return (
     <ScrollView style={{ flex: 1, backgroundColor: "#222" }}>
       <HomeHeader />
-
-      <Nav
-        categories={categories}
-        func={(type, param) => handleFilterChange(type, param)}
+      <Nav categories={categories}
+      func={(type, param) => handleFilterChange(type, param)}
       />
 
-      {loading ? (
-        <ActivityIndicator size="large" />
-      ) : (
-        <MangaList mangas={mangas} navigation={navigation.navigate} />
-      )}
-      <PaginationButtons
-        page={page}
-        totalPages={totalPages}
-        func={handlePageChange}
-      />
+      {loading ? <ActivityIndicator size="large" /> :
+        <MangaList mangas={mangas} navigation={navigation.navigate}/>
+      }
+      <PaginationHomeButtons page={page} totalPages={totalPages} func={handlePageChange}/>
     </ScrollView>
   );
 };
