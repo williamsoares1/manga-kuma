@@ -18,5 +18,15 @@ export const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    imageContainer: {
+        width: '100%',
+        height: '100%',
+    },
+    text: {
+        textAlign: 'center',
+        color: '#fff',
+        fontSize: 18,
+        marginTop: 40,
     }
 });

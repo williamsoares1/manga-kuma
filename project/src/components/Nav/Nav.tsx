@@ -5,7 +5,12 @@ import { styles } from "./styles";
 import { useState } from "react";
 import { Filters } from "../../pages/home/home";
 
-export const Nav = ({ func, categories }) => {
+interface NavProps{
+  func: Function,
+  categories: []
+}
+
+export const Nav = ({ func, categories }: NavProps) => {
   const [search, setSearch] = useState<string>();
 
   return (

@@ -1,109 +1,113 @@
 import React, { useState, useEffect } from 'react';
-import { ActivityIndicator, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 import { api } from '../../services/mangahook-api/api';
 import { HomeHeader } from '../../components/HomeHeader/HomeHeader';
 import { Nav } from '../../components/Nav/Nav';
 import { PaginationHomeButtons } from '../../components/PaginationHomeButtons/PaginationHomeButtons';
 import { MangaList } from '../../components/MangaList/MangaList';
+import { LoadingIndicator } from '../../components/LoadingIndicator/LoadingIndicator';
+import { NavigationProp } from '@react-navigation/native';
 
 export interface MangaItem {
-  id: string;
-  image: string;
-  title: string;
-  chapter: string;
-  description: string;
-  view: string;
+    id: string;
+    image: string;
+    title: string;
+    chapter: string;
+    description: string;
+    view: string;
 }
 
 export const Filters = {
-  ALL: "ALL",
-  SEARCH: "SEARCH",
-  STATE: "STATE",
-  CATEGORY: "CATEGORY",
+    ALL: "ALL",
+    SEARCH: "SEARCH",
+    STATE: "STATE",
+    CATEGORY: "CATEGORY",
 };
 
-export const Home = ({ navigation }) => {
-  const [mangas, setMangas] = useState<MangaItem[]>([]);
-  const [categories, setCategories] = useState();
-  const [totalPages, setTotalPages] = useState<number>(0);
-  const [filter, setFilter] = useState(Filters.ALL);
-  const [search, setSearch] = useState("");
-  const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
+interface HomeProps {
+  navigation: NavigationProp<any>;
+}
 
-  const getMangas = async (type, pageNum, param) => {
-    setLoading(true);
+export const Home = ({ navigation }: HomeProps) => {
+    const [mangas, setMangas] = useState<MangaItem[]>([]);
+    const [categories, setCategories] = useState<[]>([]);
+    const [totalPages, setTotalPages] = useState<number>(0);
+    const [filter, setFilter] = useState(Filters.ALL);
+    const [search, setSearch] = useState("");
+    const [page, setPage] = useState(1);
+    const [loading, setLoading] = useState(false);
 
-    try {
-      let response;
-      switch (type) {
-        case Filters.SEARCH:
-          response = await api.get(`/api/search/${param}?page=${pageNum}`);
-          break;
-        case Filters.STATE:
-          response = await api.get(
-            `/api/mangaList?state=Completed&page=${pageNum}`
-          );
-          break;
-        case Filters.CATEGORY:
-          response = await api.get(
-            `/api/mangaList?category=${param}&page=${pageNum}`
-          );
-          break;
-        case Filters.ALL:
-        default:
-          response = await api.get(`/api/mangaList?page=${pageNum}`);
-          break;
-      }
+    const getMangas = async (type: string, pageNum: number, param: string) => {
+        setLoading(true);
 
-      setTotalPages(response.data.metaData.totalPages);
-      setMangas(response.data.mangaList);
-    } catch (error) {
-      console.error(error);
-    }
-    setLoading(false);
-  };
+        try {
+            let response;
+            switch (type) {
+                case Filters.SEARCH:
+                    response = await api.get(`/api/search/${param}?page=${pageNum}`);
+                    break;
+                case Filters.STATE:
+                    response = await api.get(`/api/mangaList?state=Completed&page=${pageNum}`);
+                    break;
+                case Filters.CATEGORY:
+                    response = await api.get(`/api/mangaList?category=${param}&page=${pageNum}`);
+                    break;
+                case Filters.ALL:
+                default:
+                    response = await api.get(`/api/mangaList?page=${pageNum}`);
+                    break;
+            }
 
-  const getCategories = async () => {
-    const response = await api.get("/api/mangaList");
-    setCategories(response.data.metaData.category);
-  };
+            setTotalPages(response.data.metaData.totalPages);
+            setMangas(response.data.mangaList);
+        } catch (error) {
+            console.error(error);
+        }
+        setLoading(false);
+    };
 
-  useEffect(() => {
-    getCategories();
-  }, []);
+    const getCategories = async () => {
+        const response = await api.get("/api/mangaList");
+        setCategories(response.data.metaData.category);
+    };
 
-  useEffect(() => {
-    getMangas(filter, page, search);
-  }, [page, filter, search]);
+    useEffect(() => {
+        getCategories();
+    }, []);
 
-  const handleFilterChange = (filter, param) => {
-    setFilter(filter);
-    setSearch(param);
-    setPage(1);
-  };
+    useEffect(() => {
+        getMangas(filter, page, search);
+    }, [page, filter, search]);
 
-  const handlePageChange = (direction) => {
-    if (direction === "next" && page < totalPages) {
-      setPage(page + 1);
-    } else if (direction === "prev" && page > 1) {
-      setPage(page - 1);
-    } else if (direction === "reset") {
-      setPage(1);
-    }
-  };
+    const handleFilterChange = (filter: string, param: string) => {
+        setFilter(filter);
+        setSearch(param);
+        setPage(1);
+    };
 
-  return (
-    <ScrollView style={{ flex: 1, backgroundColor: "#222" }}>
-      <HomeHeader />
-      <Nav categories={categories}
-      func={(type, param) => handleFilterChange(type, param)}
-      />
+    const handlePageChange = (direction: string) => {
+        if (direction === "next" && page < totalPages) {
+            setPage(page + 1);
+        } else if (direction === "prev" && page > 1) {
+            setPage(page - 1);
+        } else if (direction === "reset") {
+            setPage(1);
+        }
+    };
 
-      {loading ? <ActivityIndicator size="large" /> :
-        <MangaList mangas={mangas} navigation={navigation.navigate}/>
-      }
-      <PaginationHomeButtons page={page} totalPages={totalPages} func={handlePageChange}/>
-    </ScrollView>
-  );
+    return (
+        <ScrollView style={{ flex: 1, backgroundColor: "#222" }}>
+            <HomeHeader />
+            <Nav
+                categories={categories}
+                func={(type: string, param: string) => handleFilterChange(type, param)}
+            />
+
+            {loading ? <LoadingIndicator /> :
+                <MangaList mangas={mangas} navigation={navigation.navigate} />
+            }
+
+            <PaginationHomeButtons page={page} totalPages={totalPages} func={handlePageChange} />
+        </ScrollView>
+    );
 };

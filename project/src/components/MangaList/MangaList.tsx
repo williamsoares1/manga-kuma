@@ -9,8 +9,7 @@ export const MangaList = ({ navigation, mangas, ...rest }) => {
         <FlatList
         data={mangas}
         renderItem={({ item }) =>
-          <MangaCard item={item}
-            onPress={() => navigation('Detalhes da obra', { mangaId: item.id })}
+          <MangaCard item={item} navigation={navigation}
           />
         }
         keyExtractor={(item) => item.id.toString()}
