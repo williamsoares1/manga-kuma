@@ -2,7 +2,13 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 import { AntDesign } from '@expo/vector-icons';
 
-export const PaginationHomeButtons = ({page, totalPages, func}) => {
+interface PaginationProps{
+    page: number,
+    totalPages: number,
+    func: Function,
+}
+
+export const PaginationHomeButtons = ({page, totalPages, func}: PaginationProps) => {
     return (
         <View style={styles.container}>
             {page != 1 && <Text style={styles.text} onPress={() => func('reset')}>Ir para Pagina 1</Text>}

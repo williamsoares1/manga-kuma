@@ -1,8 +1,16 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 import { AntDesign } from '@expo/vector-icons';
+import { Chapter } from "../../pages/capitulo/Capitulo";
 
-export const PaginationChapterButtons = ({index, list, func, currentChapter}) => {
+interface PaginationProps{
+    index: number,
+    list: Chapter[],
+    func: Function,
+    currentChapter: string
+}
+
+export const PaginationChapterButtons = ({index, list, func, currentChapter}: PaginationProps) => {
     return (
         <View style={styles.container}>
             <View style={styles.buttonContainer}>

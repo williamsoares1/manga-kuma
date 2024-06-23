@@ -1,6 +1,6 @@
 import { TouchableOpacity, View, Text } from "react-native";
 import { styles } from "./styles";
-import { chapter } from "../../pages/mangaEsp/mangaEsp";
+import { chapter } from "../../pages/manga/Manga";
 
 interface ChapterButtonProps{
     item: chapter,

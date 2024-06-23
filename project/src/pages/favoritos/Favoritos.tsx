@@ -7,7 +7,6 @@ import {
 } from "react-native";
 import { MangaCard } from "../../components/MangaCard/MangaCard";
 import { HomeHeader } from "../../components/HomeHeader/HomeHeader";
-import { PaginationButtons } from "../../components/PaginationButtons/PaginationButtons";
 import { useState } from "react";
 
 const Favoritos = ({ navigation }) => {
@@ -26,7 +25,7 @@ const Favoritos = ({ navigation }) => {
             <MangaCard
               item={item}
               onPress={() =>
-                navigation.navigate("Detalhes da obra", { mangaId: item.id })
+                navigation.navigate("Manga", { mangaId: item.id })
               }
             />
           )}

@@ -7,7 +7,7 @@ import { TabRoutes } from "./TabRoutes";
 import Login from "../pages/login/Login";
 import Cadastro from "../pages/cadastro/Cadastro";
 import { Capitulo } from "../pages/capitulo/Capitulo";
-import { MangaEsp } from "../pages/mangaEsp/mangaEsp";
+import { Manga } from "../pages/manga/Manga";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -20,11 +20,11 @@ function Routes() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {logado ? (
+      <Stack.Navigator screenOptions={{ headerShown: true, headerTitle: '', headerStatusBarHeight: -20 }}>
+        {!logado ? (
           <>
             <Tab.Screen name="tabs" component={TabRoutes} />
-            <Stack.Screen name="Detalhes da obra" component={MangaEsp} />
+            <Stack.Screen name="Manga" component={Manga} />
             <Stack.Screen name="Capitulo" component={Capitulo} />
           </>
         ) : (

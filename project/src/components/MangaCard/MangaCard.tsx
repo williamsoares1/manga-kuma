@@ -4,9 +4,10 @@ import { MangaItem } from "../../pages/home/home";
 
 interface MangaCardProps {
     item: MangaItem,
+    navigation : any | any
 }
 
-export const MangaCard = ({ item, ...rest }: MangaCardProps) => {
+export const MangaCard = ({ item, navigation }: MangaCardProps) => {
     const transformarTexto = (texto: string, maxLength: number ) => texto.length > maxLength ? texto.slice(0, maxLength - 3) + '...' : texto;
 
     return (
@@ -14,7 +15,7 @@ export const MangaCard = ({ item, ...rest }: MangaCardProps) => {
             {
             item.description != undefined
             ?
-                <TouchableOpacity activeOpacity={0.7} {...rest} style={styles.container}>
+                <TouchableOpacity activeOpacity={0.7} onPress={() => navigation('Manga', { mangaId: item.id })} style={styles.container}>
                     <Image resizeMode="contain" style={styles.image} source={{uri: item.image}}/>
                     <View style={styles.detailContainer}>
                         <Text style={{color: '#fff'}}>{transformarTexto(item.title, 30)}</Text>
@@ -31,7 +32,7 @@ export const MangaCard = ({ item, ...rest }: MangaCardProps) => {
                 <TouchableOpacity activeOpacity={0.7} style={styles.filterEstructure}>
                     <Image resizeMode="contain" style={styles.image} source={{uri: item.image}}/>
                     <Text style={{color: '#fff'}}>{transformarTexto(item.title, 15)}</Text>
-                    <Text {...rest} style={styles.button}>Ver Mais...</Text>
+                    <Text onPress={() => navigation('Manga', { mangaId: item.id })} style={styles.button}>Ver Mais...</Text>
                 </TouchableOpacity>
             }
         </>
