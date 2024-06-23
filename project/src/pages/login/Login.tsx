@@ -10,7 +10,7 @@ import { styles } from "./style";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { NavigationProp } from "@react-navigation/native";
-import { apiClientes} from "../../services/api-clientes/api";
+import { apiClientes } from "../../services/api-clientes/api";
 import personagem from "../../assets/image/bgPersonagemTelaLogin.png";
 import bgTela from "../../assets/image/bgTelaLogin.png";
 import botao from "../../assets/image/botaoVoltar.png";
@@ -36,12 +36,12 @@ const Login = ({ navigation }: NavigationProps) => {
         (data: UserData) =>
           data.email === login.email && data.senha === login.senha
       );
-      console.log(user);
 
       if (user.length > 0) {
         // Por um Loading..
         const userData = user[0];
-        handleLogin(userData.nome, userData.email);
+        console.log(userData.id);
+        handleLogin(userData.id, userData.nome, userData.email);
       } else {
         setError("Usuário ou senha inválidas");
         handleZerar();

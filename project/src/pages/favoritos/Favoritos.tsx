@@ -1,40 +1,35 @@
-import {
-  ActivityIndicator,
-  FlatList,
-  ScrollView,
-  Text,
-  View,
-} from "react-native";
+import { ActivityIndicator, FlatList, ScrollView } from "react-native";
 import { MangaCard } from "../../components/MangaCard/MangaCard";
 import { HomeHeader } from "../../components/HomeHeader/HomeHeader";
-import { PaginationButtons } from "../../components/PaginationButtons/PaginationButtons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { MangaList } from "../../components/MangaList/MangaList";
+import { styles } from "../../components/MangaList/styles";
 
 const Favoritos = ({ navigation }) => {
-  const [favoritos, setFavoritos] = useState([]);
+  const [salvos, setSalvos] = useState([]);
   const [loading, setLoading] = useState(false);
+  console.log(salvos);
+
+  useEffect(() => {
+    const loadFavoritos = async () => {
+      try {
+        const storedSalvos = await AsyncStorage.getItem("mangasSalvos");
+        if (storedSalvos) {
+          setSalvos(JSON.parse(storedSalvos));
+        }
+      } catch (error) {
+        console.error("Erro ao carregar favoritos:", error);
+      }
+    };
+    loadFavoritos();
+  }, []);
+
+  const handleTirarDosSalvos = () => {};
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: "#222" }}>
       <HomeHeader />
-      {loading ? (
-        <ActivityIndicator size="large" />
-      ) : (
-        <FlatList
-          data={favoritos}
-          renderItem={({ item }) => (
-            <MangaCard
-              item={item}
-              onPress={() =>
-                navigation.navigate("Detalhes da obra", { mangaId: item.id })
-              }
-            />
-          )}
-          keyExtractor={(item) => item.id.toString()}
-          scrollEnabled={false}
-          style={{ padding: 10 }}
-        />
-      )}
     </ScrollView>
   );
 };

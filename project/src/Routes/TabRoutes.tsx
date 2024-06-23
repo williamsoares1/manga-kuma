@@ -3,13 +3,14 @@ import { Ionicons } from "@expo/vector-icons";
 import { Home } from "../pages/home/home";
 import Favoritos from "../pages/favoritos/Favoritos";
 import Usuario from "../pages/usuario/Usuario";
+import { Fontisto } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
 export type RootTabParamList = {
   Principal: undefined;
   Usuario: undefined;
-  Favoritos: undefined;
+  Salvos: undefined;
 };
 
 export function TabRoutes() {
@@ -17,7 +18,12 @@ export function TabRoutes() {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarStyle: { backgroundColor: "#000"},
+        tabBarStyle: {
+          backgroundColor: "#000",
+          elevation: 0,
+          position: "absolute",
+          opacity: 0.85,
+        },
         tabBarActiveTintColor: "#FFF",
         tabBarInactiveTintColor: "#aaa",
       }}
@@ -32,11 +38,11 @@ export function TabRoutes() {
         }}
       />
       <Tab.Screen
-        name="Favoritos"
+        name="Salvos"
         component={Favoritos}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="star" color={color} size={size} />
+            <Fontisto name="favorite" size={size} color={color} />
           ),
         }}
       />

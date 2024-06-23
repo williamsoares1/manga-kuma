@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Image, Text, View } from "react-native";
+import { Alert, Image, Text, View } from "react-native";
 import { AuthContext } from "../../context/AuthContext";
 import { styles } from "./style";
 import logonome from "../../assets/image/logonome.png";
@@ -10,8 +10,7 @@ interface UserData {
 }
 
 const Usuario = () => {
-  const { userData, handleLogout } = useContext(AuthContext);
-
+  const { userData, handleLogout, excluirUsuario } = useContext(AuthContext);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -40,11 +39,47 @@ const Usuario = () => {
 
       <View
         style={{
-          backgroundColor: "#fff",
+          backgroundColor: "red",
           width: "50%",
           borderRadius: 50,
           padding: 10,
           marginTop: 60,
+          alignItems: "center",
+        }}
+      >
+        <Text
+          style={{
+            textAlign: "center",
+            color: "#fff",
+            fontWeight: "bold",
+          }}
+          onPress={() => {
+            Alert.alert(
+              "Excluir conta",
+              "Você tem certeza que deseja excluir sua conta?",
+              [
+                {
+                  text: "Cancelar",
+                  style: "cancel",
+                },
+                {
+                  text: "Excluir",
+                  onPress: () => excluirUsuario(userData.id),
+                },
+              ]
+            );
+          }}
+        >
+          Excluir conta
+        </Text>
+      </View>
+      <View
+        style={{
+          backgroundColor: "#fff",
+          width: "50%",
+          borderRadius: 50,
+          padding: 10,
+          marginTop: 6,
           alignItems: "center",
         }}
       >
