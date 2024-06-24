@@ -14,21 +14,18 @@ export const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         // alignContent: 'center',
-        justifyContent: 'center',
+        justifyContent: 'center'
     },
     mangaFav: {
         backgroundColor: '#964F7B',
         paddingVertical: 15,
-        marginVertical: 20,
-        width: '70%',
-        borderRadius: 80,
-        flexDirection: 'row',
-        alignItems: 'center'
+        marginVertical: 55,
+        width: '50%',
+        borderRadius: 100,
+        
     },
-    textFav: {
-        textAlign: 'center',
-        color: '#fff',
-        fontWeight: 'bold',
+    iconFav: {
+        textAlign: 'center'
     },
     title: {
         fontWeight: 'bold',

@@ -42,7 +42,8 @@ const Login = ({ navigation }: NavigationProps) => {
       if (user.length > 0) {
         // Por um Loading..
         const userData = user[0];
-        handleLogin(userData.nome, userData.email);
+        console.log(userData.id);
+        handleLogin(userData.id, userData.nome, userData.email);
       } else {
         setError("Usuário ou senha inválidas");
         handleZerar();
@@ -120,7 +121,7 @@ const Login = ({ navigation }: NavigationProps) => {
             Clicando aqui :D
           </Text>
         </View>
-        
+
       </ImageBackground>
     </View>
   );

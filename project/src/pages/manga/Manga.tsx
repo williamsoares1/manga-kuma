@@ -8,6 +8,7 @@ import { Fontisto } from '@expo/vector-icons';
 import { HomeHeader } from '../../components/HomeHeader/HomeHeader';
 import { LoadingIndicator } from '../../components/LoadingIndicator/LoadingIndicator';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface MangaItem {
     imageUrl: string,
@@ -37,6 +38,28 @@ export const Manga = ({ route, navigation }: MangaProps) => {
     const { mangaId } = route.params;
     const [manga, setManga] = useState<MangaItem>();
     const [isLoading, setIsLoading] = useState(true);
+    const [mangaFavList, setMangaFavList] = useState([]);
+
+    const storeData = async (data) => {
+        try {
+            await AsyncStorage.setItem('favoritos-manga-list', JSON.stringify(data));
+            alert("Manga adicionado a lista Salvos!");
+        } catch (error) {
+            console.error("Erro ao salvar manga:", error);
+        }
+    };
+
+    function addMangaFav(id, nome, autor, imgUrl) {
+        const novoManga = { id, nome, autor, imgUrl };
+        AsyncStorage.getItem('favoritos-manga-list')
+            .then(storedData => {
+                const currentFavList = storedData ? JSON.parse(storedData) : [];
+                const newFavList = [...currentFavList, novoManga];
+                setMangaFavList(newFavList);
+                storeData(newFavList);
+            })
+            .catch(error => console.error('Erro ao recuperar dados:', error));
+    }
 
     const fetchMangaDetails = async () => {
         try {
@@ -72,10 +95,16 @@ export const Manga = ({ route, navigation }: MangaProps) => {
                     </View>
 
                     {/* Botão de favoritar */}
-                    <TouchableOpacity activeOpacity={0.8} style={styles.mangaFav}>
-                        <Text style={styles.iconFav}><Fontisto name="favorite" size={24} color="#eee" /></Text>
+                    <TouchableOpacity activeOpacity={0.8} style={styles.favContainer}>
+                        <View style={styles.mangaFav}>
+                            <Text
+                                style={styles.textFav}
+                                onPress={() => addMangaFav(mangaId, manga?.name, manga?.author, manga?.imageUrl)}
+                            >Salvar nos favoritos {'  '}</Text>
+                            <Fontisto name="favorite" size={24} color="#eee" />
+                        </View>
                     </TouchableOpacity>
-                    
+
                     <View style={styles.chapterContainer}>
                         <Text style={styles.title}>Capítulos: </Text>
                         <FlatList

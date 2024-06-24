@@ -18,7 +18,7 @@ function Routes() {
   const { userData } = useContext(AuthContext);
   const logado = Object.keys(userData).length !== 0;
 
-  useEffect(() => {}, [userData]);
+  useEffect(() => { }, [userData]);
 
   return (
     <NavigationContainer>
@@ -34,7 +34,7 @@ function Routes() {
           </>
         ) : (
           <>
-           <Stack.Screen name="Inicio" component={Inicio} /> 
+            <Stack.Screen name="Inicio" component={Inicio} />
             <Stack.Screen name="login" component={Login} />
             <Stack.Screen name="cadastro" component={Cadastro} />
           </>
