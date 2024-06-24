@@ -32,7 +32,7 @@ export const ImagesList = ({ loadingImages, images, funcLoad }: ImageListProps) 
 
     const renderItem = ({ item, index }: { item: ImageObj, index: number }) => {
         const { width, height } = dimensions[index] || {};
-        const aspectRatio = width && height ? width / height : 0.05;
+        const aspectRatio = width && height ? width / height : 0.75;
 
         return (
             <View>
