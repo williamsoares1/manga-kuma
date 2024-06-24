@@ -11,7 +11,7 @@ export const Nav = ({ func, categories }) => {
   return (
     <View style={styles.container}>
       <View style={styles.inputBox}>
-        <TextInput value={search} onChangeText={a => setSearch(a)} style={styles.input}/>
+        <TextInput value={search} onChangeText={a => setSearch(a)} style={styles.input} />
         <TouchableOpacity onPress={() => func(Filters.SEARCH, search)} activeOpacity={0.8} style={styles.searchIconBox}>
           <AntDesign name="search1" size={20} color="black" />
         </TouchableOpacity>
@@ -23,9 +23,9 @@ export const Nav = ({ func, categories }) => {
         <FlatList
           scrollEnabled={false}
           data={categories}
-          renderItem={({ item }) => <SearchButton content={String(item.id)} onPress={() => func(Filters.CATEGORY,item.id)}/>}
+          renderItem={({ item }) => <SearchButton content={String(item.id)} onPress={() => func(Filters.CATEGORY, item.id)} />}
           horizontal
-          />
+        />
       </ScrollView>
     </View>
   );

@@ -1,36 +1,85 @@
-import { ActivityIndicator, FlatList, ScrollView } from "react-native";
-import { MangaCard } from "../../components/MangaCard/MangaCard";
+import { FlatList, Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { HomeHeader } from "../../components/HomeHeader/HomeHeader";
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { MangaList } from "../../components/MangaList/MangaList";
-import { styles } from "../../components/MangaList/styles";
+import { CallnText } from "../../components/CallnText/CallnText";
+import { styles } from "../mangaEsp/styles";
 
 const Favoritos = ({ navigation }) => {
-  const [salvos, setSalvos] = useState([]);
+  const [favoritos, setFavoritos] = useState([]);
   const [loading, setLoading] = useState(false);
-  console.log(salvos);
+  console.log(favoritos)
 
   useEffect(() => {
-    const loadFavoritos = async () => {
-      try {
-        const storedSalvos = await AsyncStorage.getItem("mangasSalvos");
-        if (storedSalvos) {
-          setSalvos(JSON.parse(storedSalvos));
-        }
-      } catch (error) {
-        console.error("Erro ao carregar favoritos:", error);
-      }
-    };
-    loadFavoritos();
-  }, []);
+    getData().then(res => {
+      setFavoritos(res ? res : [])
+    })
 
-  const handleTirarDosSalvos = () => {};
+  }, [])
+
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('favoritos-manga-list');
+      return jsonValue != null ? JSON.parse(jsonValue) : null;
+    } catch (e) {
+      console.error('Erro ao carregar dados:', e);
+    }
+  }
+
+  const handleTirarDosSalvos = async (itemName) => {
+    try {
+      const data = await getData();
+      if (data) {
+        const index = data.findIndex((item) => item.nome === itemName);
+        if (index !== -1) {
+          data.splice(index, 1);
+          await AsyncStorage.setItem('favoritos-manga-list', JSON.stringify(data));
+          setFavoritos(data);
+        }
+      }
+    } catch (e) {
+      console.log('Erro ao excluir item:', e)
+    }
+  }
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: "#222" }}>
       <HomeHeader />
-    </ScrollView>
+      <Text>FAVORITOS</Text>
+      <FlatList
+        data={favoritos}
+        renderItem={({ item }) =>
+          <>
+            <View style={styles.mangaEspecify}>
+              <Image
+                source={{ uri: item.imgUrl }}
+                style={{ flex: 1, width: 200, height: 300, resizeMode: "contain" }}
+              />
+              <View style={{ flex: 1, justifyContent: "space-around" }}>
+                <Text style={styles.title}>{item.nome}</Text>
+                <CallnText call="Autor:" text={item.autor} />
+                <TouchableOpacity>
+                  <View>
+                    <Text style={{ color: '#fff' }} onPress={() =>
+                      navigation.navigate("Detalhes da obra", { mangaId: item.id })
+                    }>
+                      Detalhes
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <View>
+                    <Text style={{ color: '#fff' }} onPress={() => handleTirarDosSalvos(item.nome)} >
+                      Tirar dos favoritos
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+                {/* <CallnText call="Views:" text={manga?.view} /> */}
+              </View>
+            </View>
+          </>}
+      />
+    </ScrollView >
   );
 };
 

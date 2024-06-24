@@ -37,17 +37,30 @@ export interface chapter {
 export const MangaEsp = ({ route, navigation }) => {
   const { mangaId } = route.params;
   const [manga, setManga] = useState<MangaItem>();
+  const [mangaFavList, setMangaFavList] = useState([]);
   const [loading, setLoading] = useState(true);
+  console.log(mangaFavList)
 
-  const storeData = async (value) => {
+  const storeData = async (data) => {
     try {
-      const jsonValue = JSON.stringify(value);
-      AsyncStorage.setItem("mangasSalvos", jsonValue);
+      await AsyncStorage.setItem('favoritos-manga-list', JSON.stringify(data));
       alert("Manga adicionado a lista Salvos!");
     } catch (error) {
       console.error("Erro ao salvar manga:", error);
     }
   };
+
+  function addMangaFav(id, nome, autor, imgUrl) {
+    const novoManga = { id, nome, autor, imgUrl };
+    AsyncStorage.getItem('favoritos-manga-list')
+      .then(storedData => {
+        const currentFavList = storedData ? JSON.parse(storedData) : [];
+        const newFavList = [...currentFavList, novoManga];
+        setMangaFavList(newFavList);
+        storeData(newFavList);
+      })
+      .catch(error => console.error('Erro ao recuperar dados:', error));
+  }
 
   const fetchMangaDetails = async () => {
     try {
@@ -63,11 +76,10 @@ export const MangaEsp = ({ route, navigation }) => {
     fetchMangaDetails();
   }, []);
 
+  console.log(mangaFavList)
   if (loading) {
     return <ActivityIndicator size="large" />;
   }
-
-  console.log(manga);
 
   return (
     <ScrollView style={{ paddingVertical: 30, backgroundColor: "#222" }}>
@@ -87,7 +99,7 @@ export const MangaEsp = ({ route, navigation }) => {
 
       <View style={styles.favContainer}>
         <TouchableOpacity activeOpacity={0.8} style={styles.mangaFav}>
-          <Text style={styles.iconFav} >
+          <Text style={styles.iconFav} onPress={() => addMangaFav(mangaId, manga?.name, manga?.author, manga?.imageUrl)}>
             Salvar
             <Fontisto name="favorite" size={24} color="#eee" />
           </Text>

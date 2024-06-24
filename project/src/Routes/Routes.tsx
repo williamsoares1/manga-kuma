@@ -14,8 +14,8 @@ const Stack = createStackNavigator();
 
 function Routes() {
   const { userData } = useContext(AuthContext);
-  const logado = Object.keys(userData).length !== 0;
-  // const logado = true; // editar sem ter que ficar logando
+  // const logado = Object.keys(userData).length !== 0;
+  const logado = true; // editar sem ter que ficar logando
 
   useEffect(() => { }, [userData]);
 

@@ -17,12 +17,12 @@ export function TabRoutes() {
   return (
     <Tab.Navigator
       screenOptions={{
-        headerShown: false,
+        // headerShown: false,
         tabBarStyle: {
           backgroundColor: "#000",
           elevation: 0,
-          position: "absolute",
-          opacity: 0.85,
+          // position: "absolute",
+          opacity: 0.85
         },
         tabBarActiveTintColor: "#FFF",
         tabBarInactiveTintColor: "#aaa",
