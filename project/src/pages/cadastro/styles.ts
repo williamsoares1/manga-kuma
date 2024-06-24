@@ -18,12 +18,12 @@ export const styles = StyleSheet.create({
     marginTop: 15,
     width: '80%',
     marginBottom: 1,
-    
+
   },
   inputLabel: {
     marginBottom: 0,
     fontSize: 20,
-    fontFamily: 'Knewave',
+    fontFamily: 'BebasNeue',
     color: '#1C1C1C',
 
   },
@@ -42,19 +42,16 @@ export const styles = StyleSheet.create({
     height: '100%',
   },
   containerinumaki: {
-    width: 390,
-    height: 490,
+    width: 300,
+    height: 390,
     marginRight: '40%',
-    marginTop: '1%'
+
   },
   cadastrodoinumaki: {
-    color: '#ff8fd4',
-    textShadowColor: '#8B2252',
-    textShadowOffset: { width: 2, height: 2 },
-    textShadowRadius: 4,
-    marginTop: -409,
+    color: 'black',
+    marginTop: -330,
     marginLeft: '56%',
-    fontSize: 36,
+    fontSize: 20,
     fontFamily: 'Knewave',
 
   },
@@ -67,5 +64,5 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontStyle: 'italic',
   },
-  
+
 });

@@ -14,8 +14,8 @@ export const styles = StyleSheet.create({
     },
     label: {
         fontSize: 25,
-        fontFamily: 'Knewave',
-        textAlign: 'center',    
+        fontFamily: 'BebasNeue',
+        textAlign: 'center',
     },
     input: {
         color: '#fff',
@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
         borderColor: '#ccc',
         borderRadius: 50,
         paddingHorizontal: 10,
-        marginBottom: 20,  
+        marginBottom: 20,
         fontStyle: 'italic',
     },
 
@@ -34,32 +34,32 @@ export const styles = StyleSheet.create({
         backgroundColor: '#8B2252', 
         paddingVertical: 10,
         paddingHorizontal: 35,
-        borderRadius: 25,        
+        borderRadius: 25,
     },
 
     buttonText:{
         color: '#fff',
         textAlign: 'center',
         fontSize: 18,
-        fontFamily: 'Knewave'
+        fontFamily: 'BebasNeue'
     },
 
     textFooter:{ 
         marginRight: '10%',
         fontSize: 14,
-        fontFamily: 'Knewave'
+        fontFamily: 'BebasNeue'
     },
     textFooter2:{ 
         marginRight: '15%',
         fontSize: 14,
-        fontFamily: 'Knewave'
+        fontFamily: 'BebasNeue'
     },
 
 
     textClick:{
         fontSize: 15,
         marginRight: '13%',
-        fontFamily: 'Knewave',
+        fontFamily: 'BebasNeue',
         color: '#CD2990'
     },
 
@@ -82,7 +82,7 @@ export const styles = StyleSheet.create({
         minHeight: '100%',
         alignSelf: 'flex-end'
     },
-    
+
     error: {
         color: 'red',
         marginBottom: 20,
