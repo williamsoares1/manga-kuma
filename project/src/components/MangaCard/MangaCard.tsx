@@ -24,15 +24,15 @@ export const MangaCard = ({ item, navigation }: MangaCardProps) => {
                             {item.description != '' ? transformarTexto(item.description, 60): "Descrição não disponivel"}
                         </Text>
                         <View style={styles.detailBox}>
-                            <Text style={{color: '#FF8FD4'}}>{item.view}</Text>
-                            <Text style={styles.button}>{transformarTexto(item.chapter, 11)}</Text>
+                            <Text style={{color: '#FF8FD4', flex: 1}}>{item.view}</Text>
+                            <Text style={styles.button}>{transformarTexto(item.chapter, 10)}</Text>
                         </View>
                     </View>
                 </TouchableOpacity>
             :
                 <TouchableOpacity activeOpacity={0.7} style={styles.filterEstructure} onPress={() => navigation('Manga', { mangaId: item.id })}>
                     <Image resizeMode="contain" style={styles.image} source={{uri: item.image}}/>
-                    <Text style={{color: '#fff'}}>{transformarTexto(item.title, 15)}</Text>
+                    <Text style={{color: '#fff'}}>{transformarTexto(item.title, 14)}</Text>
                     <Text style={styles.button}>Ver Mais...</Text>
                 </TouchableOpacity>
             }
