@@ -119,3 +119,4 @@ export const MangaEsp = ({ route, navigation }) => {
     </ScrollView>
   );
 };
+

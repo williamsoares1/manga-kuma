@@ -3,69 +3,69 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 60,
+    marginTop: 30,
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
   fundo: {
     flex: 1,
+    marginTop: 10,
     resizeMode: 'cover', 
-    position: 'absolute', 
-    minWidth: '100%', 
-    minHeight: '100%', 
+    width: '100%',
+    height: '100%', 
   },
   inputContainer: {
     alignItems: 'center',
-    width: '80%',
-    marginBottom: 5,
-    
+    marginTop: 15,
+    paddingHorizontal: 20,
+    marginBottom: 1,
+
   },
   inputLabel: {
-    color: 'black',
-    marginBottom: 8,
-    fontSize: 16,
-    fontWeight: 'bold',
+    marginBottom: 5,
+    fontSize: 20,
+    fontFamily: 'BebasNeue',
+    color: '#1C1C1C',
+
   },
   input: {
     textAlign: 'center',
     width: '100%',
     height: 56,
-    paddingHorizontal: 10,
-    backgroundColor: 'black',
-    color: '#FFFFFF',
+    paddingHorizontal: 80,
+    backgroundColor: '#1C1C1C',
     borderRadius: 50,
-    fontWeight: 'bold',
-    borderWidth: 6,
-    borderColor: '#ccc',
+    fontStyle: 'italic',
+    fontSize: 10,
   },
-  inumaki: {
+ inumaki: {
     width: '100%',
     height: '100%',
-    marginLeft: -76,
-    // marginTop: -35
   },
   containerinumaki: {
-    width: 330,
-    height: 430,
+    width: 500,
+    height: 590,
+    marginRight: '35%',
+
   },
   cadastrodoinumaki: {
-    marginTop: -355,
-    marginLeft: 110,
-    fontSize: 21,
-    fontWeight: 'bold'
+    color: 'black',
+    position: 'relative',
+    top: '-83%',
+    left: 110,
+    textAlign: 'center',
+    fontSize: 22,
+    fontFamily: 'Knewave',
+
   },
   error: {
-    color: 'red',
-    marginBottom: 20,
+    color: '#ff8fd4',
+    textShadowColor: '#CD2990',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 1,
+    fontSize: 12,
+    fontWeight: 'bold',
+    fontStyle: 'italic',
   },
-  buttonVoltar:{
-    marginBottom: -100
-},
 
-buttonImage:{
-    width: 75,
-    height: 80,
-    resizeMode: 'contain',
-    marginVertical:10
-},
-  
 });

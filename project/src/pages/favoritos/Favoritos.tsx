@@ -3,7 +3,8 @@ import { HomeHeader } from "../../components/HomeHeader/HomeHeader";
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CallnText } from "../../components/CallnText/CallnText";
-import { styles } from "../mangaEsp/styles";
+import { styles } from "./style";
+
 
 const Favoritos = ({ navigation }) => {
   const [favoritos, setFavoritos] = useState([]);
@@ -61,7 +62,7 @@ const Favoritos = ({ navigation }) => {
                 <TouchableOpacity>
                   <View>
                     <Text style={{ color: '#fff' }} onPress={() =>
-                      navigation.navigate("Detalhes da obra", { mangaId: item.id })
+                      navigation.navigate("Manga", { mangaId: item.id })
                     }>
                       Detalhes
                     </Text>
