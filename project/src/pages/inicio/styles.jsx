@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 300,
+    marginTop: 370,
     alignItems: 'center',
   },
   fundo: {
@@ -11,18 +11,17 @@ export const styles = StyleSheet.create({
     height: '100%'
   },
   textoinicio: {
-    color: 'white',
-    fontSize: 11, 
+    color: '#fff',
+    fontSize: 12, 
     textAlign: 'center',
-    fontStyle: 'italic',
+    fontFamily: 'PlayfairDisplay'
 
   },
   textoinicio2: {
-    color: 'white',
-    fontSize: 11, 
+    color: '#fff',
+    fontSize: 12, 
     textAlign: 'center',
-    marginBottom: 140,
-    fontStyle: 'italic',
+    fontFamily: 'PlayfairDisplay'
   },
   button: {
     borderWidth: 1,
@@ -50,7 +49,7 @@ export const styles = StyleSheet.create({
     color: '#DCDCDC',
     paddingRight: 5,
     fontSize: 15,
-    fontFamily: 'PlayfairDisplay',
+    fontFamily: 'BebasNeue',
   },
   cadastroTexto2: {
     textAlign: 'center',
@@ -65,4 +64,9 @@ export const styles = StyleSheet.create({
     fontSize: 15,
     fontFamily: 'BebasNeue',
   },
+  textoContainer: {
+    marginBottom: 150,
+    flexDirection: 'column',
+    justifyContent: 'flex-end'
+  }
 });

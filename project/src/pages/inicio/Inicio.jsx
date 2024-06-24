@@ -39,8 +39,10 @@ export default function Inicio() {
         <ImageBackground source={image} style={styles.fundo}>
             <View style={styles.container}>
                 {/* Texto em baixo do bem vindos */}
-                <Text style={styles.textoinicio}> "Faça login agora e desbloqueie seu portal para </Text>
-                <Text style={styles.textoinicio2}> infinitas aventuras em quadrinhos!" </Text>
+                <View style={styles.textoContainer}>
+                    <Text style={styles.textoinicio}> "Faça login agora e desbloqueie seu portal para </Text>
+                    <Text style={styles.textoinicio2}> infinitas aventuras em quadrinhos!" </Text>
+                </View>
 
                 {/* Botão de Login */}
                 <TouchableOpacity

@@ -24,7 +24,7 @@ function Routes() {
       <Stack.Navigator
         screenOptions={{ headerShown: true, headerTitle: '', headerStatusBarHeight:20 }}
       >
-        {!logado ? (
+        {logado ? (
           <>
             <Stack.Screen name="tabs" component={TabRoutes} />
             <Stack.Screen name="Manga" component={Manga} />
