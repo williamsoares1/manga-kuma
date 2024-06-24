@@ -1,4 +1,4 @@
-import { FlatList, Image, ScrollView, Text, View, ActivityIndicator } from "react-native";
+import { FlatList, Image, ScrollView, Text } from "react-native";
 import { api } from "../../services/mangahook-api/api";
 import { useEffect, useState } from "react";
 import { styles } from "./styles";
@@ -8,9 +8,14 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { LoadingIndicator } from "../../components/LoadingIndicator/LoadingIndicator";
 import { NavigationProp, RouteProp } from "@react-navigation/native";
 
-export interface Chapter {
+export type Chapter = {
     id: string,
     name: string
+}
+
+type ImageObj = {
+    title: string,
+    image: string
 }
 
 interface CapituloProps {
@@ -20,7 +25,7 @@ interface CapituloProps {
 
 export const Capitulo = ({ route, navigation }: CapituloProps) => {
     const { id, mangaId } = route.params;
-    const [images, setImages] = useState([]);
+    const [images, setImages] = useState<ImageObj[]>([]);
     const [currentChapter, setCurrentChapter] = useState<string>(String);
     const [chapterList, setChapterList] = useState<Chapter[]>([]);
     const [currentIndex, setCurrentIndex] = useState<number>(Number);
@@ -76,10 +81,10 @@ export const Capitulo = ({ route, navigation }: CapituloProps) => {
                     <FlatList
                         style={styles.imageContainer}
                         data={images}
-                        renderItem={({ item }) => <Image source={{ uri: item.image }} style={styles.image} />}
-                        initialNumToRender={1}
+                        renderItem={({ item }) => <Image alt={item.title} source={{ uri: item.image }} style={styles.image} />}
+                        initialNumToRender={2}
                         maxToRenderPerBatch={1}
-                        updateCellsBatchingPeriod={200}
+                        updateCellsBatchingPeriod={250}
                         scrollEnabled={false}
                     />
                     {headerAndPagination()}
