@@ -3,12 +3,13 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { AuthContext } from "../context/AuthContext";
 import { useContext, useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { TabRoutes } from "./TabRoutes";
+import { TabRoutes } from "./BottomTabRoutes/TabRoutes";
 import Login from "../pages/login/Login";
 import Cadastro from "../pages/cadastro/Cadastro";
 import { Capitulo } from "../pages/capitulo/Capitulo";
 import { Manga } from "../pages/manga/Manga";
-import Inicio from "../pages/inicio/Inicio"; // Importe a página Inicio
+import Inicio from "../pages/inicio/Inicio";
+import { StatusBar } from "react-native";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -21,10 +22,11 @@ function Routes() {
 
   return (
     <NavigationContainer>
+      <StatusBar barStyle="light-content" backgroundColor="#222" />
       <Stack.Navigator
-        screenOptions={{ headerShown: true, headerTitle: '', headerStatusBarHeight:20 }}
+        screenOptions={{ headerShown: false }}
       >
-        {logado ? (
+        {!logado ? (
           <>
             <Stack.Screen name="tabs" component={TabRoutes} />
             <Stack.Screen name="Manga" component={Manga} />

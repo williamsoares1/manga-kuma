@@ -1,5 +1,5 @@
 import {
-  Image,
+  ActivityIndicator,
   ImageBackground,
   Text,
   TextInput,
@@ -10,10 +10,8 @@ import { styles } from "./style";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { NavigationProp } from "@react-navigation/native";
-import { apiClientes} from "../../services/api-clientes/api";
-import personagem from "../../assets/image/bgPersonagemTelaLogin.png";
+import { apiClientes } from "../../services/api-clientes/api";
 import bgTela from "../../assets/image/bgTelaLogin.png";
-import botao from "../../assets/image/botaoVoltar.png";
 import { useCallback } from 'react';
 import { useFonts } from 'expo-font';
 
@@ -29,16 +27,17 @@ interface UserData {
 const Login = ({ navigation }: NavigationProps) => {
   const [login, setLogin] = useState({ email: "", senha: "" });
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false); // Estado de carregamento
   const { handleLogin } = useContext(AuthContext);
 
   const handleSubmit = async () => {
+    setLoading(true); // Inicia o carregamento
     try {
       const response = await apiClientes.get("/users");
       const user = response.data.filter(
         (data: UserData) =>
           data.email === login.email && data.senha === login.senha
       );
-      console.log(user);
 
       if (user.length > 0) {
         // Por um Loading..
@@ -50,6 +49,8 @@ const Login = ({ navigation }: NavigationProps) => {
       }
     } catch (error) {
       setError("Erro ao realizar login");
+    } finally {
+      setLoading(false); // Termina o carregamento
     }
   };
 
@@ -85,7 +86,7 @@ const Login = ({ navigation }: NavigationProps) => {
             autoCapitalize="none"
             value={login.email}
             onChangeText={(text) => setLogin({ ...login, email: text })}
-          ></TextInput>
+          />
           <Text style={styles.label}>Senha</Text>
           <TextInput
             style={styles.input}
@@ -96,15 +97,17 @@ const Login = ({ navigation }: NavigationProps) => {
             secureTextEntry={true}
             value={login.senha}
             onChangeText={(text) => setLogin({ ...login, senha: text })}
-          ></TextInput>
+          />
 
           {error && <Text style={styles.error}>{error}</Text>}
 
-          <TouchableOpacity style={styles.buttonStyle}>
-            <Text style={styles.buttonText} onPress={handleSubmit}>
-              Entrar
-            </Text>
-          </TouchableOpacity>
+          {loading ? (
+            <ActivityIndicator size="large" color="#964F7B" />
+          ) : (
+            <TouchableOpacity style={styles.buttonStyle} onPress={handleSubmit}>
+              <Text style={styles.buttonText}>Entrar</Text>
+            </TouchableOpacity>
+          )}
         </View>
 
         <View style={styles.textStyle}>
@@ -114,11 +117,9 @@ const Login = ({ navigation }: NavigationProps) => {
             style={styles.textClick}
             onPress={() => navigation.navigate("cadastro")}
           >
-            {" "}
-          Clicando aqui :D
+            Clicando aqui :D
           </Text>
         </View>
-
         
       </ImageBackground>
     </View>

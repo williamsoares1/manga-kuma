@@ -1,4 +1,4 @@
-import { FlatList, Image, ScrollView, Text } from "react-native";
+import { ActivityIndicator, FlatList, Image, ScrollView, Text, View } from "react-native";
 import { api } from "../../services/mangahook-api/api";
 import { useEffect, useState } from "react";
 import { styles } from "./styles";
@@ -31,6 +31,7 @@ export const Capitulo = ({ route, navigation }: CapituloProps) => {
     const [currentIndex, setCurrentIndex] = useState<number>(Number);
     const [title, setTitle] = useState<string>();
     const [isLoading, setIsLoading] = useState(true);
+    const [loadingImages, setLoadingImages] = useState<boolean[]>([]);
 
     const findChapter = async (chapterId: string) => {
         setIsLoading(true);
@@ -43,11 +44,21 @@ export const Capitulo = ({ route, navigation }: CapituloProps) => {
             setChapterList(chapterListIds);
             setCurrentIndex(chapterListIds.findIndex((item: { name: any; }) => item.name === currentChapter));
             setTitle(title);
+
+            setLoadingImages(new Array(images.length).fill(true));
         } catch (error) {
             console.error(error);
         } finally {
             setIsLoading(false);
         }
+    };
+
+    const handleImageLoad = (index: number) => {
+        setLoadingImages(prevState => {
+            const newLoadingImages = [...prevState];
+            newLoadingImages[index] = false;
+            return newLoadingImages;
+        });
     };
 
     const pagination = (param: string) => {
@@ -74,17 +85,29 @@ export const Capitulo = ({ route, navigation }: CapituloProps) => {
         <ScrollView style={styles.container}>
             <HomeHeader />
             {isLoading ? (
-                <LoadingIndicator/>
+                <LoadingIndicator />
             ) : (
                 <>
                     {headerAndPagination()}
                     <FlatList
                         style={styles.imageContainer}
                         data={images}
-                        renderItem={({ item }) => <Image alt={item.title} source={{ uri: item.image }} style={styles.image} />}
-                        initialNumToRender={2}
+                        renderItem={({ item, index }) => (
+                            <View>
+                                {loadingImages[index] && (
+                                    <LoadingIndicator/>
+                                )}
+                                <Image
+                                    alt={item.title}
+                                    source={{ uri: item.image }}
+                                    style={styles.image}
+                                    onLoad={() => handleImageLoad(index)}
+                                />
+                            </View>
+                        )}
+                        initialNumToRender={1}
                         maxToRenderPerBatch={1}
-                        updateCellsBatchingPeriod={250}
+                        updateCellsBatchingPeriod={2000}
                         scrollEnabled={false}
                     />
                     {headerAndPagination()}

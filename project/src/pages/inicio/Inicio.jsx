@@ -6,7 +6,7 @@ import { useCallback } from 'react';
 import { useFonts } from 'expo-font';
 
 const image = require('../../assets/image/fundo1.png');
-const imageBV = require('../../assets/image/bem_vindo.png')
+const imageBV = require('../../assets/image/bem_vindo.png');
 
 export default function Inicio() {
     const [isPressed, setIsPressed] = useState(false);
