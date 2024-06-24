@@ -14,6 +14,8 @@ import { apiClientes} from "../../services/api-clientes/api";
 import personagem from "../../assets/image/bgPersonagemTelaLogin.png";
 import bgTela from "../../assets/image/bgTelaLogin.png";
 import botao from "../../assets/image/botaoVoltar.png";
+import { useCallback } from 'react';
+import { useFonts } from 'expo-font';
 
 interface NavigationProps {
   navigation: NavigationProp<any, any>;
@@ -55,20 +57,23 @@ const Login = ({ navigation }: NavigationProps) => {
     setLogin({ email: "", senha: "" });
   };
 
+  const [fontsLoaded, fontError] = useFonts({
+    'Knewave': require('../../assets/fonts/Knewave-Regular.ttf'),
+  });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded || fontError) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, fontError]);
+
+  if (!fontsLoaded && !fontError) {
+    return null;
+  }
+
   return (
     <View style={styles.container}>
       <ImageBackground source={bgTela} style={styles.bgTela}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("login")}
-          style={styles.buttonVoltar}
-        >
-          <Image source={botao} style={styles.buttonImage} />
-        </TouchableOpacity>
-
-        <View style={styles.loginContainer}>
-          <Text style={styles.loginText}>LOGIN !</Text>
-          <Text style={styles.welcomeText}>É um prazer ter você de volta!</Text>
-        </View>
 
         <View style={styles.inputContainer}>
           <Text style={styles.label}>E-mail</Text>
@@ -103,21 +108,18 @@ const Login = ({ navigation }: NavigationProps) => {
         </View>
 
         <View style={styles.textStyle}>
-          <Text style={styles.textFooter}> Não tem Login?</Text>
+          <Text style={styles.textFooter2}> Não tem Login?</Text>
           <Text style={styles.textFooter}> Você pode se cadastrar</Text>
           <Text
             style={styles.textClick}
             onPress={() => navigation.navigate("cadastro")}
           >
             {" "}
-            Clicando aqui :D
+          Clicando aqui :D
           </Text>
         </View>
 
-        <ImageBackground
-          source={personagem}
-          style={styles.personagemContainer}
-        ></ImageBackground>
+        
       </ImageBackground>
     </View>
   );

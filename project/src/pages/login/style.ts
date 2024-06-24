@@ -5,49 +5,33 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
     },
-    loginContainer: {
-        marginBottom: 100,
-    },
-    loginText: {
-        marginTop: 70,
-        marginBottom:0,
-        fontSize: 65,
-        fontFamily: '',
-        textAlign: 'center',
-        fontWeight: 'bold',
-        textShadowColor: 'rgba(0, 0, 0, 0.75)', // Cor da sombra
-        textShadowOffset: { width: 2, height: 2 }, // Deslocamento da sombra
-        textShadowRadius: 30, // Raio da sombra
-    },
-    welcomeText: {
-        fontSize: 25,
-        textAlign: 'center',
-    },
+
     inputContainer: {
         flex: 1,
+        marginTop: '20%',
         justifyContent: 'center', 
         alignItems: 'center',
-        marginBottom: -150,
     },
     label: {
-        fontSize: 17,
-        textAlign: 'center',
-        fontWeight: 'bold'        
+        fontSize: 25,
+        fontFamily: 'Knewave',
+        textAlign: 'center',    
     },
     input: {
         color: '#fff',
-        width: '65%',
-        height: 45,
+        width: '76%',
+        height: 60,
         backgroundColor: '#191919',
         borderWidth: 6,
         borderColor: '#ccc',
         borderRadius: 50,
         paddingHorizontal: 10,
         marginBottom: 20,  
+        fontStyle: 'italic',
     },
 
     buttonStyle: {
-        backgroundColor: 'black', 
+        backgroundColor: '#8B2252', 
         paddingVertical: 10,
         paddingHorizontal: 35,
         borderRadius: 25,        
@@ -57,22 +41,26 @@ export const styles = StyleSheet.create({
         color: '#fff',
         textAlign: 'center',
         fontSize: 18,
-        fontWeight: 'bold',
+        fontFamily: 'Knewave'
     },
 
     textFooter:{ 
-        alignSelf:'center',
-        marginLeft: 200,
+        marginRight: '10%',
         fontSize: 14,
-        fontWeight: 'bold'
+        fontFamily: 'Knewave'
+    },
+    textFooter2:{ 
+        marginRight: '15%',
+        fontSize: 14,
+        fontFamily: 'Knewave'
     },
 
+
     textClick:{
-        alignSelf:'center',
-        marginLeft: 200,
-        fontSize: 17,
-        fontWeight: 'bold',
-        color: '#ff0084'
+        fontSize: 15,
+        marginRight: '13%',
+        fontFamily: 'Knewave',
+        color: '#CD2990'
     },
 
     personagemContainer:{
@@ -82,30 +70,19 @@ export const styles = StyleSheet.create({
     },
 
     textStyle:{
-        position: 'absolute',
-        bottom: 0,
-        width: '100%',
-        alignItems: 'center',
-        marginBottom: 10,
+        alignItems: 'flex-end',
+        marginRight: 0
     },
 
     bgTela:{
         width: '100%',
         height: '100%',
         position: 'absolute',
-        bottom: 0,
+        minWidth: '100%',
+        minHeight: '100%',
+        alignSelf: 'flex-end'
     },
-
-    buttonVoltar:{
-        marginBottom: -100
-    },
-
-    buttonImage:{
-        width: 75,
-        height: 80,
-        resizeMode: 'contain',
-        marginVertical:10
-    },
+    
     error: {
         color: 'red',
         marginBottom: 20,
