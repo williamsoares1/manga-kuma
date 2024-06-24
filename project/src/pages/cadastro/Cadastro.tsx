@@ -4,6 +4,9 @@ import { NavigationProp } from '@react-navigation/native';
 import { styles } from './styles';
 import inumaki from "../../assets/image/3.png";
 import { apiClientes } from "../../services/api-clientes/api";
+import { useCallback } from 'react';
+import { useFonts } from 'expo-font';
+
 
 import image from "../../assets/image/2.png";
 
@@ -46,7 +49,21 @@ const Cadastro = ({ navigation }: NavigationProps) => {
         }
     };
 
+    const [fontsLoaded, fontError] = useFonts({
+        'Knewave': require('../../assets/fonts/Knewave-Regular.ttf'),
+      });
+    
+      const onLayoutRootView = useCallback(async () => {
+        if (fontsLoaded || fontError) {
+          await SplashScreen.hideAsync();
+        }
+      }, [fontsLoaded, fontError]);
+    
+      if (!fontsLoaded && !fontError) {
+        return null;
+      }
     return (
+        
         <ImageBackground source={image} style={styles.fundo}>
             <View style={styles.container}>
                 {/* Input 1 */}
@@ -91,7 +108,7 @@ const Cadastro = ({ navigation }: NavigationProps) => {
 
                 <View style={styles.containerinumaki}>
                     <Image style={styles.inumaki} source={inumaki} />
-                    <Text style={styles.cadastrodoinumaki} onPress={handleSubmit}>CADASTRAR</Text>
+                    <Text style={styles.cadastrodoinumaki} onPress={handleSubmit}>CADASTRAR!</Text>
                 </View>
             </View>
         </ImageBackground>
