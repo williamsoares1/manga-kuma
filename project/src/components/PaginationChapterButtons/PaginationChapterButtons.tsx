@@ -11,6 +11,8 @@ interface PaginationProps{
 }
 
 export const PaginationChapterButtons = ({index, list, func, currentChapter}: PaginationProps) => {
+    const transformarTexto = (texto: string, maxLength: number ) => texto.length > maxLength ? texto.slice(0, maxLength - 3) + '...' : texto;
+
     return (
         <View style={styles.container}>
             <View style={styles.buttonContainer}>
@@ -20,7 +22,7 @@ export const PaginationChapterButtons = ({index, list, func, currentChapter}: Pa
                 </TouchableOpacity>
                 }
 
-                <Text style={styles.text}>{currentChapter}</Text>
+                <Text style={styles.text}>{transformarTexto(currentChapter, 14)}</Text>
 
                 {index != 0 && 
                 <TouchableOpacity activeOpacity={0.7} style={styles.button} onPress={() => func("next")}>

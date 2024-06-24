@@ -29,10 +29,10 @@ export const MangaCard = ({ item, navigation }: MangaCardProps) => {
                     </View>
                 </TouchableOpacity>
             :
-                <TouchableOpacity activeOpacity={0.7} style={styles.filterEstructure}>
+                <TouchableOpacity activeOpacity={0.7} style={styles.filterEstructure} onPress={() => navigation('Manga', { mangaId: item.id })}>
                     <Image resizeMode="contain" style={styles.image} source={{uri: item.image}}/>
                     <Text style={{color: '#fff'}}>{transformarTexto(item.title, 15)}</Text>
-                    <Text onPress={() => navigation('Manga', { mangaId: item.id })} style={styles.button}>Ver Mais...</Text>
+                    <Text style={styles.button}>Ver Mais...</Text>
                 </TouchableOpacity>
             }
         </>

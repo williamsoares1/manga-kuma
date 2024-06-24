@@ -20,10 +20,12 @@ function Routes() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: true, headerTitle: '', headerStatusBarHeight: -20 }}>
+      <Stack.Navigator
+        screenOptions={{ headerShown: true, headerTitle: '', headerStatusBarHeight:20 }}
+      >
         {!logado ? (
           <>
-            <Tab.Screen name="tabs" component={TabRoutes} />
+            <Stack.Screen name="tabs" component={TabRoutes} />
             <Stack.Screen name="Manga" component={Manga} />
             <Stack.Screen name="Capitulo" component={Capitulo} />
           </>
