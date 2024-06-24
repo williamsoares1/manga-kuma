@@ -4,6 +4,7 @@ export const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#222',
+        marginTop: 40
     },
     logo: {
         width: 90,
