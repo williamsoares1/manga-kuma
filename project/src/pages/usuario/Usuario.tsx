@@ -1,65 +1,32 @@
 import { useContext } from "react";
-import { Image, Text, View } from "react-native";
+import { Image, ImageBackground, ScrollView, Text, View } from "react-native";
 import { AuthContext } from "../../context/AuthContext";
 import { styles } from "./style";
-import logonome from "../../assets/image/logonome.png";
-
-interface UserData {
-  nome: string;
-  email: string;
-}
+import { HomeHeader } from "../../components/HomeHeader/HomeHeader";
+import { MaterialIcons } from '@expo/vector-icons';
+import logo from '../../assets/image/logo/logo_user.png';
 
 const Usuario = () => {
   const { userData, handleLogout } = useContext(AuthContext);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Image source={logonome} style={styles.logoHeader} />
-      </View>
+    <ScrollView style={styles.container}>
+      <HomeHeader/>
+      
+        <View style={styles.dadosContainer}>
+          <Text style={styles.dadosText}>NOME DE USUÁRIO: </Text>
+          <Text style={styles.dados}>{userData.nome ?? ""}</Text>
+          <Text style={styles.dadosText}>SEU E-MAIL</Text>
+          <Text style={styles.dados}>{userData.email ?? ""}</Text>
+        </View>
 
-      <View>
-        <Image source={logonome} style={styles.imageUser} />
-      </View>
+        <Image style={styles.img} alt="logo" source={logo}/>
 
-      <View>
-        <Text style={styles.textUser}>NOME DE USUÁRIO</Text>
-      </View>
-
-      <View>
-        <Text style={styles.label}>USUÁRIO</Text>
-        <Text style={styles.input}>{userData.nome ?? ""}</Text>
-        <Text style={styles.label}>E-MAIL</Text>
-        <Text style={styles.input}>{userData.email ?? ""}</Text>
-      </View>
-
-      {/* <View>
-        <Text style={styles.textDescricao}>DESCRIÇÃO DO PERFIL</Text>
-        <Text style={styles.textBox}>Descricao aqui</Text>
-      </View> */}
-
-      <View
-        style={{
-          backgroundColor: "#fff",
-          width: "50%",
-          borderRadius: 50,
-          padding: 10,
-          marginTop: 60,
-          alignItems: "center",
-        }}
-      >
-        <Text
-          style={{
-            textAlign: "center",
-            color: "#000",
-            fontWeight: "bold",
-          }}
-          onPress={handleLogout}
-        >
-          Finalizar sessão
+        <Text style={styles.text} onPress={handleLogout}>
+          Finalizar sessão <MaterialIcons name="logout" size={15} color="#fff" />
         </Text>
-      </View>
-    </View>
+        
+    </ScrollView>
   );
 };
 

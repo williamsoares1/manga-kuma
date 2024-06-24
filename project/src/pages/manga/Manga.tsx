@@ -61,7 +61,7 @@ export const Manga = ({ route, navigation }: MangaProps) => {
             ) : (
                 <>
                     <View style={styles.mangaEspecify}>
-                        <Image source={{ uri: manga?.imageUrl }} style={{ flex: 1, width: 200, height: 300, resizeMode: 'contain' }} />
+                        <Image alt={manga?.name} source={{ uri: manga?.imageUrl }} style={{ flex: 1, width: 200, height: 300, resizeMode: 'contain' }} />
                         <View style={{ flex: 1, justifyContent: 'space-around' }}>
                             <Text style={styles.title}>{manga?.name}</Text>
                             <CallnText call='Gêneros:' text={manga?.genres.join(', ')} />
