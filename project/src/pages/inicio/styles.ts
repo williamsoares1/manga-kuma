@@ -12,16 +12,10 @@ export const styles = StyleSheet.create({
   },
   textoinicio: {
     color: '#fff',
-    fontSize: 12, 
+    fontSize: 15, 
     textAlign: 'center',
     fontFamily: 'PlayfairDisplay'
 
-  },
-  textoinicio2: {
-    color: '#fff',
-    fontSize: 12, 
-    textAlign: 'center',
-    fontFamily: 'PlayfairDisplay'
   },
   button: {
     borderWidth: 1,

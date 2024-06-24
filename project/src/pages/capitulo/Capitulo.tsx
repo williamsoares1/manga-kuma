@@ -20,7 +20,7 @@ export type ImageObj = {
 }
 
 interface CapituloProps {
-    route: RouteProp<{ params: { mangaId: string, id: string } }, 'params'>;
+    route: RouteProp<any>;
     navigation: NavigationProp<any>;
 }
 

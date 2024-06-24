@@ -1,7 +1,6 @@
 import { Image, View, Text, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 import { MangaItem } from "../../pages/home/home";
-import { NavigationProp } from "@react-navigation/native";
 
 interface MangaCardProps {
     item: MangaItem,
