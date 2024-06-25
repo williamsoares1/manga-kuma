@@ -84,7 +84,13 @@ export const styles = StyleSheet.create({
     },
 
     error: {
-        color: 'red',
+        color: '#ff8fd4',
+        textShadowColor: '#CD2990',
+        textShadowOffset: { width: 1, height: 1 },
+        textShadowRadius: 1,
+        fontSize: 12,
+        fontWeight: 'bold',
+        fontStyle: 'italic',
         marginBottom: 20,
     },
 
