@@ -72,7 +72,7 @@ const Favoritos = ({ navigation }: NavigationProps) => {
             <Text style={styles.title}>Você não tem favoritos salvos.</Text>
           ) : (
             <FlatList
-            scrollEnabled={false}
+              scrollEnabled={false}
               data={favoritos}
               renderItem={({ item }: { item: MangaFavoritoParams }) =>
                 <>
@@ -84,8 +84,15 @@ const Favoritos = ({ navigation }: NavigationProps) => {
                     <View style={{ flex: 1, justifyContent: "space-around" }}>
                       <Text style={styles.title}>{item.nome}</Text>
                       <CallnText call="Autor:" text={item.autor} />
-                      <Text style={styles.text} onPress={() => navigation.navigate("Manga", {mangaId: item.id})}><FontAwesome5 name="book-open" size={15} color="white" /></Text>
                       
+                      <Text
+                        style={styles.capitulos}
+                        onPress={() => navigation.navigate('Manga', { mangaId: item.id })}
+                      >
+                        {'Capítulos  '}
+                        <FontAwesome5 name="book-open" size={15} color="white" />
+                      </Text>
+        
                       <BotaoFavoritar
                         title='Excluir dos favoritos'
                         icon=""

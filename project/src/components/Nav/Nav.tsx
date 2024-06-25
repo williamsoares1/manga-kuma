@@ -3,12 +3,18 @@ import { NavButton } from "../NavButton/NavButton";
 import { AntDesign } from '@expo/vector-icons';
 import { styles } from "./styles";
 import { useState } from "react";
-import { Filters } from "../../pages/home/home";
 
-interface NavProps{
+interface NavProps {
   func: Function,
-  categories: {id: string}[]
+  categories: { id: string }[]
 }
+
+export const Filters = {
+  ALL: "ALL",
+  SEARCH: "SEARCH",
+  STATE: "STATE",
+  CATEGORY: "CATEGORY",
+};
 
 export const Nav = ({ func, categories }: NavProps) => {
   const [search, setSearch] = useState<string>();

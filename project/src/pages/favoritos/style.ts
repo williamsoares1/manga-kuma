@@ -47,5 +47,14 @@ export const styles = StyleSheet.create({
         fontSize: 16,
         textTransform: 'uppercase',
         marginTop: 15,
+    },
+    capitulos: {
+        backgroundColor: '#964F7B',
+        color: '#fff',
+        paddingVertical: 8,
+        textAlign: 'center',
+        fontSize: 14,
+        marginTop: 15,
+        fontWeight: 'bold'
     }
 })
