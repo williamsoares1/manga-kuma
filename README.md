@@ -1,10 +1,10 @@
-# Manga Kuma App - Grupo 3 Serratec 2024.1
+# Manga Kuma - Grupo 3 Serratec 2024.1
 
-Bem-vindo ao repositório do Manga Reader App! Este projeto foi desenvolvido pelo Grupo 3 do curso Serratec 2024.1 durante as aulas de React Native.
+Bem-vindo ao repositório do Manga Kuma! Este projeto foi desenvolvido pelo Grupo 3 do curso Serratec 2024.1 durante as aulas de React Native.
 
 ## Descrição
 
-O Manga Reader App é uma aplicação móvel de leitura de mangás, que permite aos usuários fazerem login e cadastro, além de acessar e ler diversos mangás através de uma API. 
+O Manga Kuma é uma aplicação móvel de leitura de mangás, que permite aos usuários fazerem login e cadastro, além de acessar e ler diversos mangás através de uma API. 
 
 ## Funcionalidades
 
@@ -16,5 +16,5 @@ O Manga Reader App é uma aplicação móvel de leitura de mangás, que permite 
 
 - **React Native com TypeScript:** Framework utilizado para o desenvolvimento do aplicativo móvel.
 - **APIs:** 
-  - **Cadastro e Login:** API específica para autenticação de usuários.
+  - **Json-Server:** API local utilizada para fazer o login e cadastro de usuários.
   - **MangaHook API:** API utilizada para obter os mangás.
