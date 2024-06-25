@@ -1,16 +1,16 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { View, Text, ScrollView, Image, FlatList, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, ScrollView, Image, FlatList } from 'react-native';
 import { api } from '../../services/mangahook-api/api';
 import { styles } from './styles';
 import { CallnText } from '../../components/CallnText/CallnText';
 import { ChapterButton } from '../../components/ChapterButton/ChapterButton';
-import { HomeHeader } from '../../components/HomeHeader/HomeHeader';
-import { LoadingIndicator } from '../../components/LoadingIndicator/LoadingIndicator';
+import { Header } from '../../components/Header/Header';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { BotaoFavoritar } from '../../components/BotaoFavoritar/BotaoFavoritar';
+import { LoadingIndicator } from '../../components/LoadingIndicator/LoadingIndicator';
 
-interface MangaItem {
+type MangaItem = {
     imageUrl: string,
     name: string,
     author: string,
@@ -21,15 +21,7 @@ interface MangaItem {
     chapterList: ChapterInfo[]
 }
 
-interface MangaFavoritoParams {
-    id: string;
-    nome: string;
-    autor: string;
-    imgUrl: string;
-    favoritado: boolean;
-}
-
-export interface ChapterInfo {
+export type ChapterInfo = {
     id: string,
     path: string,
     name: string,
@@ -40,6 +32,14 @@ export interface ChapterInfo {
 interface MangaProps {
     route: RouteProp<any>;
     navigation: NavigationProp<any>;
+}
+
+interface MangaFavoritoParams {
+    id: string;
+    nome: string;
+    autor: string;
+    imgUrl: string;
+    favoritado: boolean;
 }
 
 export const Manga = ({ route, navigation }: MangaProps) => {
@@ -128,9 +128,9 @@ export const Manga = ({ route, navigation }: MangaProps) => {
 
     return (
         <ScrollView style={{ backgroundColor: '#222' }}>
-            <HomeHeader />
+            <Header />
             {isLoading ? (
-                <LoadingIndicator />
+                <LoadingIndicator/>
             ) : (
                 <>
                     <View style={styles.mangaEspecify}>

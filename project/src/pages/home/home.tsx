@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView } from 'react-native';
 import { api } from '../../services/mangahook-api/api';
-import { HomeHeader } from '../../components/HomeHeader/HomeHeader';
+import { Header } from '../../components/Header/Header';
 import { Nav } from '../../components/Nav/Nav';
 import { PaginationHomeButtons } from '../../components/PaginationHomeButtons/PaginationHomeButtons';
 import { MangaList } from '../../components/MangaList/MangaList';
-import { LoadingIndicator } from '../../components/LoadingIndicator/LoadingIndicator';
 import { NavigationProp } from '@react-navigation/native';
+import { LoadingIndicator } from '../../components/LoadingIndicator/LoadingIndicator';
 
 export interface MangaItem {
     id: string;
@@ -97,11 +97,9 @@ export const Home = ({ navigation }: HomeProps) => {
 
     return (
         <ScrollView style={{ flex: 1, backgroundColor: "#222" }}>
-            <HomeHeader />
-            <Nav
-                categories={categories}
-                func={(type: string, param: string) => handleFilterChange(type, param)}
-            />
+            <Header />
+            <Nav categories={categories}
+                func={(type: string, param: string) => handleFilterChange(type, param)}/>
 
             {loading ? <LoadingIndicator /> :
                 <MangaList mangas={mangas} navigation={navigation.navigate} />

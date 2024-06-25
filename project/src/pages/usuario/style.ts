@@ -33,6 +33,17 @@ export const styles = StyleSheet.create({
         alignItems: "center",
     },
 
+    textExc: {
+        textAlign: "center",
+        color: "#fff",
+        fontSize: 20,
+        textAlignVertical: 'center',
+        backgroundColor: "#BD2828",
+        padding: 10,
+        marginTop: 60,
+        alignItems: "center",
+    },
+
     dadosContainer: {
         paddingHorizontal: 10,
     },

@@ -128,7 +128,7 @@ const Cadastro = ({ navigation }: NavigationProps) => {
                 <View style={styles.containerinumaki}>
                     <Image style={styles.inumaki} source={inumaki} />
                     {isLoading ? (
-                        <ActivityIndicator size="large" color="#0000ff" />
+                        <ActivityIndicator style={styles.cadastrodoinumaki} size="large" color="#964F7B" />
                     ) : (
                         <Text style={styles.cadastrodoinumaki} onPress={handleSubmit}>CADASTRAR!</Text>
                     )}

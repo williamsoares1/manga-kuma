@@ -1,11 +1,13 @@
-import { FlatList, Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
-import { HomeHeader } from "../../components/HomeHeader/HomeHeader";
-import { useCallback, useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import { ActivityIndicator, FlatList, Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Header } from "../../components/Header/Header";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CallnText } from "../../components/CallnText/CallnText";
 import { styles } from "./style";
 import { BotaoFavoritar } from "../../components/BotaoFavoritar/BotaoFavoritar";
 import { NavigationProp } from "@react-navigation/native";
+import { AntDesign } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 
 interface NavigationProps {
   navigation: NavigationProp<any, any>;
@@ -22,24 +24,6 @@ interface MangaFavoritoParams {
 const Favoritos = ({ navigation }: NavigationProps) => {
   const [favoritos, setFavoritos] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [someOtherState, setSomeOtherState] = useState(false);
-
-  console.log(favoritos)
-
-  const updateSomeOtherState = useCallback(() => {
-    setSomeOtherState(true);
-  }, [setSomeOtherState]);
-
-  useEffect(() => {
-    getData().then(res => {
-      setFavoritos(res ? res : [])
-    })
-    if (!someOtherState) {
-      setSomeOtherState(true);
-    }
-  }, [updateSomeOtherState]);
-
-
 
   const getData = async () => {
     try {
@@ -66,49 +50,58 @@ const Favoritos = ({ navigation }: NavigationProps) => {
     }
   }
 
+  const atualizar = async () => {
+    setLoading(true);
+    const res = await getData();
+    setFavoritos(res ? res : []);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    atualizar();
+  }, []);
+
   return (
     <ScrollView style={{ flex: 1, backgroundColor: "#222" }}>
-      <HomeHeader />
-      <Text>FAVORITOS</Text>
-      <FlatList
-        data={favoritos}
-        renderItem={({ item }: { item: MangaFavoritoParams }) =>
-          <>
-            <View style={styles.mangaEspecify}>
-              <Image
-                source={{ uri: item.imgUrl }}
-                style={{ flex: 1, width: 200, height: 300, resizeMode: "contain" }}
-              />
-              <View style={{ flex: 1, justifyContent: "space-around" }}>
-                <Text style={styles.title}>{item.nome}</Text>
-                <CallnText call="Autor:" text={item.autor} />
-                <TouchableOpacity>
-                  <View>
-                    <Text style={{ color: '#fff' }} onPress={() =>
-                      navigation.navigate("Manga", { mangaId: item.id })
-                    }>
-                      Detalhes
-                    </Text>
+      <Header />
+      {loading ? (
+        <ActivityIndicator size="large" color="#fff" />
+      ) : (
+        <>
+          {favoritos.length === 0 ? (
+            <Text style={styles.title}>Você não tem favoritos salvos.</Text>
+          ) : (
+            <FlatList
+            scrollEnabled={false}
+              data={favoritos}
+              renderItem={({ item }: { item: MangaFavoritoParams }) =>
+                <>
+                  <View style={styles.mangaEspecify}>
+                    <Image
+                      source={{ uri: item.imgUrl }}
+                      style={{ flex: 1, width: 200, height: 300, resizeMode: "contain" }}
+                    />
+                    <View style={{ flex: 1, justifyContent: "space-around" }}>
+                      <Text style={styles.title}>{item.nome}</Text>
+                      <CallnText call="Autor:" text={item.autor} />
+                      <Text style={styles.text}><FontAwesome5 name="book-open" size={15} color="white" /></Text>
+                      
+                      <BotaoFavoritar
+                        title='Excluir dos favoritos'
+                        icon=""
+                        onPress={() => handleTirarDosSalvos(item.id)}
+                      />
+                    </View>
                   </View>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <View>
-                    <Text style={{ color: '#fff' }} onPress={() => handleTirarDosSalvos(item.id)} >
-                      Tirar dos favoritos
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-                <BotaoFavoritar
-                  title='Manga Salvo  '
-                  icon="star"
-                  onPress={() => handleTirarDosSalvos(item.id)}
-                />
-                {/* <CallnText call="Views:" text={manga?.view} /> */}
-              </View>
-            </View>
-          </>}
-      />
-    </ScrollView >
+                </>}
+            />
+          )}
+        </>
+      )}
+      <TouchableOpacity onPress={atualizar}>
+        <Text style={styles.text}>Atualizar <AntDesign name="reload1" size={15} color="#fff" /></Text>
+      </TouchableOpacity>
+    </ScrollView>
   );
 };
 
