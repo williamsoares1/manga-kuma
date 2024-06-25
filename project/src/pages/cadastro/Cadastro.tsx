@@ -23,12 +23,25 @@ const Cadastro = ({ navigation }: NavigationProps) => {
             setError("Todos os campos são obrigatórios.");
             return;
         }
-        
+
         setError(null);
         setIsLoading(true);
 
         try {
-            const response = await apiClientes.post("/users", {
+            // Verificar se o e-mail já existe
+            const response = await apiClientes.get('/users');
+            const users = response.data;
+            const emailExists = users.some(user => user.email === email);
+
+            if (emailExists) {
+                alert('Email já cadastrado');
+                setName("");
+                setEmail("");
+                setPassword("");
+                return;
+            }
+
+            const createUserResponse = await apiClientes.post("/users", {
                 nome: name,
                 email: email,
                 senha: password,
@@ -39,11 +52,12 @@ const Cadastro = ({ navigation }: NavigationProps) => {
             setPassword("");
             Alert.alert('Sucesso', 'Usuário cadastrado com sucesso!');
 
-            if (response.status === 201) {
+            if (createUserResponse.status === 201) {
                 navigation.navigate('login');
             }
         } catch (error) {
-            setError("Erro ao cadastrar usuário: " + (error));
+            setError("Erro ao cadastrar usuário");
+            console.log("Erro ao cadastrar usuário: ", error.response.data);
         } finally {
             setIsLoading(false);
         }
@@ -74,6 +88,7 @@ const Cadastro = ({ navigation }: NavigationProps) => {
                             style={styles.input}
                             placeholder="Digite seu nome de usuário"
                             placeholderTextColor="#FFFFFF"
+                            autoCapitalize="none"
                             value={name}
                             onChangeText={(text) => setName(text)}
                         />
@@ -85,6 +100,7 @@ const Cadastro = ({ navigation }: NavigationProps) => {
                         <TextInput
                             style={styles.input}
                             placeholder="Digite seu email"
+                            autoCapitalize="none"
                             placeholderTextColor="#FFFFFF"
                             value={email}
                             onChangeText={(text) => setEmail(text)}
@@ -97,8 +113,9 @@ const Cadastro = ({ navigation }: NavigationProps) => {
                         <TextInput
                             style={styles.input}
                             placeholder="Digite sua senha"
+                            autoCapitalize="none"
                             placeholderTextColor="#FFFFFF"
-                            secureTextEntry={true}
+                            // secureTextEntry={true}
                             value={password}
                             onChangeText={(text) => setPassword(text)}
                         />

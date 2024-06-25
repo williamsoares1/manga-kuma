@@ -10,6 +10,7 @@ import { Capitulo } from "../pages/capitulo/Capitulo";
 import { Manga } from "../pages/manga/Manga";
 import Inicio from "../pages/inicio/Inicio";
 import { StatusBar } from "react-native";
+import Favoritos from "../pages/favoritos/Favoritos";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
