@@ -10,6 +10,7 @@ import { Capitulo } from "../pages/capitulo/Capitulo";
 import { Manga } from "../pages/manga/Manga";
 import Inicio from "../pages/inicio/Inicio";
 import { StatusBar } from "react-native";
+import Favoritos from "../pages/favoritos/Favoritos";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -26,7 +27,7 @@ function Routes() {
       <Stack.Navigator
         screenOptions={{ headerShown: false }}
       >
-        {logado ? (
+        {!logado ? (
           <>
             <Stack.Screen name="tabs" component={TabRoutes} />
             <Stack.Screen name="Manga" component={Manga} />
