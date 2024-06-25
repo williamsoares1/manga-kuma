@@ -32,8 +32,8 @@ export const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: '#964F7B',
-        width: 135,
-        height: 40,
+        flex: 1,
+        paddingVertical: 10,
         textAlignVertical: 'center',
         paddingHorizontal: 20,
         borderRadius: 5,

@@ -1,4 +1,4 @@
-import { ActivityIndicator, FlatList, Image, ScrollView, Text, View } from "react-native";
+import { ActivityIndicator, FlatList, Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { api } from "../../services/mangahook-api/api";
 import { useEffect, useState } from "react";
 import { styles } from "./styles";
@@ -7,19 +7,20 @@ import { PaginationChapterButtons } from "../../components/PaginationChapterButt
 import { FontAwesome5 } from '@expo/vector-icons';
 import { LoadingIndicator } from "../../components/LoadingIndicator/LoadingIndicator";
 import { NavigationProp, RouteProp } from "@react-navigation/native";
+import { ImagesList } from "../../components/ImagesList/ImagesList";
 
 export type Chapter = {
     id: string,
     name: string
 }
 
-type ImageObj = {
+export type ImageObj = {
     title: string,
     image: string
 }
 
 interface CapituloProps {
-    route: RouteProp<{ params: { mangaId: string, id: string } }, 'params'>;
+    route: RouteProp<any>;
     navigation: NavigationProp<any>;
 }
 
@@ -74,9 +75,11 @@ export const Capitulo = ({ route, navigation }: CapituloProps) => {
 
     const headerAndPagination = () => (
         <>
-            <Text style={styles.text} onPress={() => navigation.navigate('Manga', { mangaId })}>
-                <FontAwesome5 name="book-open" size={24} color="white" />   {title}
-            </Text>
+            <TouchableOpacity onPress={() => navigation.navigate('Manga', { mangaId })}>
+                <Text style={styles.text}>
+                    <FontAwesome5 name="book-open" size={24} color="white" />   {title}
+                </Text>
+            </TouchableOpacity>
             <PaginationChapterButtons func={pagination} index={currentIndex} list={chapterList} currentChapter={currentChapter} />
         </>
     );
@@ -89,27 +92,7 @@ export const Capitulo = ({ route, navigation }: CapituloProps) => {
             ) : (
                 <>
                     {headerAndPagination()}
-                    <FlatList
-                        style={styles.imageContainer}
-                        data={images}
-                        renderItem={({ item, index }) => (
-                            <View>
-                                {loadingImages[index] && (
-                                    <LoadingIndicator/>
-                                )}
-                                <Image
-                                    alt={item.title}
-                                    source={{ uri: item.image }}
-                                    style={styles.image}
-                                    onLoad={() => handleImageLoad(index)}
-                                />
-                            </View>
-                        )}
-                        initialNumToRender={1}
-                        maxToRenderPerBatch={1}
-                        updateCellsBatchingPeriod={2000}
-                        scrollEnabled={false}
-                    />
+                    <ImagesList loadingImages={loadingImages} funcLoad={handleImageLoad} images={images} />
                     {headerAndPagination()}
                 </>
             )}

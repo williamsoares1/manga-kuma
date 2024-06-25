@@ -71,7 +71,7 @@ export const styles = StyleSheet.create({
 
     textStyle:{
         alignItems: 'flex-end',
-        marginRight: 0
+        marginBottom: 45
     },
 
     bgTela:{

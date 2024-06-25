@@ -45,7 +45,7 @@ export default function Inicio() {
                 {/* Texto em baixo do bem vindos */}
                 <View style={styles.textoContainer}>
                     <Text style={styles.textoinicio}> "Faça login agora e desbloqueie seu portal para </Text>
-                    <Text style={styles.textoinicio2}> infinitas aventuras em quadrinhos!" </Text>
+                    <Text style={styles.textoinicio}> infinitas aventuras em quadrinhos!" </Text>
                 </View>
 
                 {/* Botão de Login */}

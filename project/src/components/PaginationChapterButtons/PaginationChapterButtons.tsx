@@ -22,7 +22,7 @@ export const PaginationChapterButtons = ({index, list, func, currentChapter}: Pa
                 </TouchableOpacity>
                 }
 
-                <Text style={styles.text}>{transformarTexto(currentChapter, 14)}</Text>
+                <Text style={styles.text}>{transformarTexto(currentChapter, 15)}</Text>
 
                 {index != 0 && 
                 <TouchableOpacity activeOpacity={0.7} style={styles.button} onPress={() => func("next")}>

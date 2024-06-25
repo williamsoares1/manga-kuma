@@ -3,8 +3,7 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#222',
-        marginTop: 40
+        backgroundColor: '#222'
     },
     logo: {
         width: 90,
@@ -12,7 +11,7 @@ export const styles = StyleSheet.create({
     },
     logoBox: {
         flex: 1,
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
     }, 
     imageContainer:{
         flex: 1,

@@ -8,20 +8,10 @@ export const styles = StyleSheet.create({
     contentContainer: {
         alignItems: 'center',
     },
-    image: {
-        flex: 1,
-        width: '100%',
-        aspectRatio: 0.75,
-        resizeMode: 'contain',
-    },
     loadingContainer: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-    },
-    imageContainer: {
-        maxWidth: '100%',
-        height: 'auto',
     },
     text: {
         textAlign: 'center',

@@ -4,11 +4,11 @@ import { api } from '../../services/mangahook-api/api';
 import { styles } from './styles';
 import { CallnText } from '../../components/CallnText/CallnText';
 import { ChapterButton } from '../../components/ChapterButton/ChapterButton';
-import { Fontisto } from '@expo/vector-icons';
 import { HomeHeader } from '../../components/HomeHeader/HomeHeader';
 import { LoadingIndicator } from '../../components/LoadingIndicator/LoadingIndicator';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Ionicons } from "@expo/vector-icons";
 
 interface MangaItem {
     imageUrl: string,
@@ -30,7 +30,7 @@ export interface ChapterInfo {
 }
 
 interface MangaProps {
-    route: RouteProp<{ params: { mangaId: string } }, 'params'>;
+    route: RouteProp<any>;
     navigation: NavigationProp<any>;
 }
 
@@ -77,7 +77,7 @@ export const Manga = ({ route, navigation }: MangaProps) => {
     }, []);
 
     return (
-        <ScrollView style={{ paddingVertical: 30, backgroundColor: '#222' }}>
+        <ScrollView style={{ backgroundColor: '#222' }}>
             <HomeHeader />
             {isLoading ? (
                 <LoadingIndicator />
@@ -95,14 +95,8 @@ export const Manga = ({ route, navigation }: MangaProps) => {
                     </View>
 
                     {/* Botão de favoritar */}
-                    <TouchableOpacity activeOpacity={0.8} style={styles.favContainer}>
-                        <View style={styles.mangaFav}>
-                            <Text
-                                style={styles.textFav}
-                                onPress={() => addMangaFav(mangaId, manga?.name, manga?.author, manga?.imageUrl)}
-                            >Salvar nos favoritos {'  '}</Text>
-                            <Fontisto name="favorite" size={24} color="#eee" />
-                        </View>
+                    <TouchableOpacity onPress={() => addMangaFav(mangaId, manga?.name, manga?.author, manga?.imageUrl)} activeOpacity={0.8} style={styles.favContainer}>
+                            <Text style={styles.textFav}>Salvar nos favoritos {'  '} <Ionicons name="star" color={'#fff'} size={15} /></Text>
                     </TouchableOpacity>
 
                     <View style={styles.chapterContainer}>
