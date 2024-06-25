@@ -5,6 +5,7 @@ import Favoritos from "../../pages/favoritos/Favoritos";
 import Usuario from "../../pages/usuario/Usuario";
 import { FontAwesome5 } from '@expo/vector-icons';
 import { FavoritosProvider } from "../../context/favoritosContext";
+
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
 export type RootTabParamList = {

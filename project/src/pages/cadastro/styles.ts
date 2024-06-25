@@ -37,6 +37,7 @@ export const styles = StyleSheet.create({
     borderRadius: 50,
     fontStyle: 'italic',
     fontSize: 10,
+    color: "#fff"
   },
  inumaki: {
     width: '100%',

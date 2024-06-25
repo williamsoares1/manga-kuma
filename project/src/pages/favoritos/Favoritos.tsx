@@ -1,14 +1,25 @@
 import { FlatList, Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { HomeHeader } from "../../components/HomeHeader/HomeHeader";
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CallnText } from "../../components/CallnText/CallnText";
 import { styles } from "./style";
-import { FavoritosContext } from "../../context/favoritosContext";
+import { BotaoFavoritar } from "../../components/BotaoFavoritar/BotaoFavoritar";
+import { NavigationProp } from "@react-navigation/native";
 
+interface NavigationProps {
+  navigation: NavigationProp<any, any>;
+}
 
-const Favoritos = ({ navigation }) => {
-  const { updateFavoritos, setUpdateFavoritos } = useContext(FavoritosContext);
+interface MangaFavoritoParams {
+  id: string;
+  nome: string;
+  autor: string;
+  imgUrl: string;
+  favoritado: boolean;
+}
+
+const Favoritos = ({ navigation }: NavigationProps) => {
   const [favoritos, setFavoritos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [someOtherState, setSomeOtherState] = useState(false);
@@ -39,11 +50,11 @@ const Favoritos = ({ navigation }) => {
     }
   }
 
-  const handleTirarDosSalvos = async (mangaId) => {
+  const handleTirarDosSalvos = async (mangaId: string) => {
     try {
       const data = await getData();
       if (data) {
-        const index = data.findIndex((item) => item.id === mangaId);
+        const index = data.findIndex((item: MangaFavoritoParams) => item.id === mangaId);
         if (index !== -1) {
           data.splice(index, 1);
           await AsyncStorage.setItem('favoritos-manga-list', JSON.stringify(data));
@@ -61,7 +72,7 @@ const Favoritos = ({ navigation }) => {
       <Text>FAVORITOS</Text>
       <FlatList
         data={favoritos}
-        renderItem={({ item }) =>
+        renderItem={({ item }: { item: MangaFavoritoParams }) =>
           <>
             <View style={styles.mangaEspecify}>
               <Image
@@ -87,6 +98,11 @@ const Favoritos = ({ navigation }) => {
                     </Text>
                   </View>
                 </TouchableOpacity>
+                <BotaoFavoritar
+                  title='Manga Salvo  '
+                  icon="star"
+                  onPress={() => handleTirarDosSalvos(item.id)}
+                />
                 {/* <CallnText call="Views:" text={manga?.view} /> */}
               </View>
             </View>

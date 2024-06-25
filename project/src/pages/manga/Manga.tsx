@@ -8,7 +8,7 @@ import { HomeHeader } from '../../components/HomeHeader/HomeHeader';
 import { LoadingIndicator } from '../../components/LoadingIndicator/LoadingIndicator';
 import { NavigationProp, RouteProp } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Ionicons } from "@expo/vector-icons";
+import { BotaoFavoritar } from '../../components/BotaoFavoritar/BotaoFavoritar';
 
 interface MangaItem {
     imageUrl: string,
@@ -19,6 +19,14 @@ interface MangaItem {
     view: string,
     genres: string[],
     chapterList: ChapterInfo[]
+}
+
+interface MangaFavoritoParams {
+    id: string;
+    nome: string;
+    autor: string;
+    imgUrl: string;
+    favoritado: boolean;
 }
 
 export interface ChapterInfo {
@@ -39,12 +47,7 @@ export const Manga = ({ route, navigation }: MangaProps) => {
     const [manga, setManga] = useState<MangaItem>();
     const [isLoading, setIsLoading] = useState(true);
     const [mangaFavorito, setMangaFavorito] = useState({});
-    const [estaFavoritado, setEstaFavoritado] = useState();
-
-    useEffect(() => {
-        fetchMangaDetails();
-        jaExisteNosFavoritos()
-    }, []);
+    const [estaFavoritado, setEstaFavoritado] = useState(false);
 
     const fetchMangaDetails = async () => {
         try {
@@ -57,10 +60,9 @@ export const Manga = ({ route, navigation }: MangaProps) => {
         }
     };
 
-    const storeData = async (data) => {
+    const storeData = async (data: MangaFavoritoParams[]) => {
         try {
             await AsyncStorage.setItem('favoritos-manga-list', JSON.stringify(data));
-            console.log("Manga adicionado a lista Salvos!");
         } catch (error) {
             console.error("Erro ao salvar manga:", error);
         }
@@ -76,16 +78,16 @@ export const Manga = ({ route, navigation }: MangaProps) => {
         }
     }
 
-    const handleTirarDosSalvos = async (mangaId) => {
+    const handleTirarDosSalvos = async (mangaId: string) => {
         try {
             const data = await getData();
             if (data) {
-                const index = data.findIndex((item) => item.id === mangaId);
+                const index = data.findIndex((item: MangaFavoritoParams) => item.id === mangaId);
                 if (index !== -1) {
                     data.splice(index, 1);
                     await AsyncStorage.setItem('favoritos-manga-list', JSON.stringify(data));
                     setEstaFavoritado(false);
-                    console.log('excluido')
+                    console.log('desfavoritado')
                 }
             }
         } catch (e) {
@@ -93,11 +95,10 @@ export const Manga = ({ route, navigation }: MangaProps) => {
         }
     }
 
-    async function addMangaFav(id, nome, autor, imgUrl) {
+    async function addMangaFav(id: string, nome: string, autor: string, imgUrl: string) {
         const storedData = await AsyncStorage.getItem('favoritos-manga-list');
         const favoritosList = storedData ? JSON.parse(storedData) : [];
-
-        const jaExisteNosFavoritos = favoritosList.some((favorito) => favorito.id === id && favorito.favoritado === true);
+        const jaExisteNosFavoritos = favoritosList.some((favorito: MangaFavoritoParams) => favorito.id === id && favorito.favoritado === true);
 
         if (!jaExisteNosFavoritos) {
             const novoManga = { id, nome, autor, imgUrl, favoritado: true };
@@ -105,7 +106,7 @@ export const Manga = ({ route, navigation }: MangaProps) => {
             setMangaFavorito(newFavList);
             storeData(newFavList);
             setEstaFavoritado(true);
-            console.log('add favoritos')
+            console.log('favoritado')
         } else {
             console.log('manga ja existe dentro do mangaFavList');
             setEstaFavoritado(true)
@@ -116,10 +117,14 @@ export const Manga = ({ route, navigation }: MangaProps) => {
         const storedData = await AsyncStorage.getItem('favoritos-manga-list');
         const favoritosList = storedData ? JSON.parse(storedData) : [];
 
-        const jaExisteNosFavoritos = favoritosList.some((favorito) => favorito.id === mangaId && favorito.favoritado === true);
+        const jaExisteNosFavoritos = favoritosList.some((favorito: MangaFavoritoParams) => favorito.id === mangaId && favorito.favoritado === true);
         setEstaFavoritado(jaExisteNosFavoritos);
-        console.log(estaFavoritado)
     }
+
+    useEffect(() => {
+        fetchMangaDetails();
+        jaExisteNosFavoritos()
+    }, []);
 
     return (
         <ScrollView style={{ backgroundColor: '#222' }}>
@@ -139,19 +144,18 @@ export const Manga = ({ route, navigation }: MangaProps) => {
                         </View>
                     </View>
 
-                    {/* Botão de favoritar */}
                     {estaFavoritado ? (
-                        <>
-                            <TouchableOpacity onPress={() => handleTirarDosSalvos(mangaId)} activeOpacity={0.8} style={styles.favContainer}>
-                                <Text style={styles.textFav}>Manga salvo {'  '} <Ionicons name="star" color={'#fff'} size={15} /></Text>
-                            </TouchableOpacity>
-                        </>
+                        <BotaoFavoritar
+                            title='Manga Salvo  '
+                            icon="star"
+                            onPress={() => handleTirarDosSalvos(mangaId)}
+                        />
                     ) : (
-                        <>
-                            <TouchableOpacity onPress={() => addMangaFav(mangaId, manga?.name, manga?.author, manga?.imageUrl)} activeOpacity={0.8} style={styles.favContainer}>
-                                <Text style={styles.textFav}>Salvar nos favoritos {'  '} <Ionicons name="star-outline" color={'#fff'} size={15} /></Text>
-                            </TouchableOpacity>
-                        </>
+                        <BotaoFavoritar
+                            title='Salvar nos favoritos  '
+                            icon="star-outline"
+                            onPress={() => addMangaFav(mangaId, manga?.name ?? '', manga?.author ?? '', manga?.imageUrl ?? '')}
+                        />
                     )}
 
                     <View style={styles.chapterContainer}>
