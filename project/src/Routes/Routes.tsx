@@ -32,6 +32,7 @@ function Routes() {
             <Stack.Screen name="tabs" component={TabRoutes} />
             <Stack.Screen name="Manga" component={Manga} />
             <Stack.Screen name="Capitulo" component={Capitulo} />
+            <Stack.Screen name="cadastro" component={Cadastro} />
           </>
         ) : (
           <>

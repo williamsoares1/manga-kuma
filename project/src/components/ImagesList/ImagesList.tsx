@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { FlatList, View, Image } from "react-native";
-import { LoadingIndicator } from "../LoadingIndicator/LoadingIndicator";
 import { styles } from "./styles";
 import { ImageObj } from "../../pages/capitulo/Capitulo";
+import { LoadingIndicator } from "../LoadingIndicator/LoadingIndicator";
 
 type ImageListProps = {
     loadingImages: boolean[],

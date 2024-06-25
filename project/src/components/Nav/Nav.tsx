@@ -1,5 +1,5 @@
 import { FlatList, ScrollView, TextInput, TouchableOpacity, View } from "react-native";
-import { SearchButton } from "../SearchButton/SearchButton";
+import { NavButton } from "../NavButton/NavButton";
 import { AntDesign } from '@expo/vector-icons';
 import { styles } from "./styles";
 import { useState } from "react";
@@ -7,7 +7,7 @@ import { Filters } from "../../pages/home/home";
 
 interface NavProps{
   func: Function,
-  categories: []
+  categories: {id: string}[]
 }
 
 export const Nav = ({ func, categories }: NavProps) => {
@@ -22,13 +22,13 @@ export const Nav = ({ func, categories }: NavProps) => {
         </TouchableOpacity>
       </View>
       <ScrollView horizontal>
-        <SearchButton content="home" onPress={() => func(Filters.ALL)} />
-        <SearchButton content="completos" onPress={() => func(Filters.STATE)} />
-        <SearchButton content="aleatorio" onPress={() => func(Filters.CATEGORY, "Comedy")} />
+        <NavButton content="home" func={() => func(Filters.ALL)} />
+        <NavButton content="completos" func={() => func(Filters.STATE)} />
+        <NavButton content="aleatorio" func={() => func(Filters.CATEGORY, "Comedy")} />
         <FlatList
           scrollEnabled={false}
           data={categories}
-          renderItem={({ item }) => <SearchButton content={String(item.id)} onPress={() => func(Filters.CATEGORY, item.id)} />}
+          renderItem={({ item }) => <NavButton content={String(item.id)} func={() => func(Filters.CATEGORY, item.id)} />}
           horizontal
         />
       </ScrollView>

@@ -3,7 +3,7 @@ import { styles } from "./styles";
 import imagemBackGround from "../../assets/image/backgroudheader.png";
 import logo from "../../assets/image/logo/logo_home.png";
 
-export const HomeHeader = () => {
+export const Header = () => {
     return (
         <View style={styles.container}>
             <View style={styles.logoBox}>

@@ -13,7 +13,6 @@ export const styles = StyleSheet.create({
     favContainer: {
         flex: 1,
         flexDirection: 'row',
-        // alignContent: 'center',
         justifyContent: 'center'
     },
     mangaFav: {
@@ -32,6 +31,7 @@ export const styles = StyleSheet.create({
         fontSize: 15,
         color: '#fff',
         marginVertical: 15,
+        textAlign: 'center'
     },
     chapterContainer: {
         backgroundColor: '#964F7B',
@@ -39,4 +39,13 @@ export const styles = StyleSheet.create({
         padding: 10,
         marginHorizontal: 20
     },
+    text: {
+        backgroundColor: '#964F7B',
+        color: '#fff',
+        paddingVertical: 8,
+        textAlign: 'center',
+        fontSize: 16,
+        textTransform: 'uppercase',
+        marginTop: 15,
+    }
 })
